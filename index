@@ -11,7 +11,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('Screenshot 2024-07-15 at 12.53.04 PM.png');
+            background-image: url('background_image.png');
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
