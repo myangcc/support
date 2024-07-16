@@ -12,50 +12,93 @@
             padding: 0;
         }
         .header {
-            background-color: #001f3f;
+            background-color: #3f51b5;
             color: white;
             padding: 20px;
             text-align: center;
         }
-        .search-bar {
+        .search-bar-container {
             display: flex;
             justify-content: center;
             margin: 20px;
+            position: relative;
+        }
+        .search-bar {
+            display: flex;
+            width: 60%;
+            max-width: 800px;
+            border-radius: 5px;
+            overflow: hidden;
         }
         .search-bar input {
-            width: 50%;
+            flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-right: none;
+            outline: none;
         }
         .search-bar button {
             padding: 10px;
             border: none;
             background-color: #007bff;
             color: white;
-            border-radius: 4px;
-            margin-left: 10px;
+            cursor: pointer;
         }
         .content {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
+            padding: 0 20px;
         }
         .card {
             background-color: white;
             width: 200px;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            text-align: center;
+            text-align: left;
         }
         .card h3 {
-            font-size: 18px;
+            font-size: 16px;
+            margin: 0 0 10px;
+            color: #333;
         }
         .card p {
             font-size: 14px;
             color: #555;
+            margin: 0;
+        }
+        .card .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+        .card .tag.answer {
+            background-color: #007bff;
+        }
+        .card .tag.liveboard {
+            background-color: #6f42c1;
+        }
+        .contributors {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .contributors img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .view-count {
+            font-size: 12px;
+            color: #888;
+            margin-left: auto;
         }
     </style>
 </head>
@@ -63,18 +106,30 @@
     <div class="header">
         <h1>Insights in Recruiting</h1>
     </div>
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Ask a question">
-        <button onclick="search()">Search</button>
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Ask a question">
+            <button onclick="search()">Search</button>
+        </div>
     </div>
     <div class="content">
         <div class="card">
             <h3>Career Site Visitors</h3>
-            <p>Report</p>
+            <div class="tag report">Report</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
         </div>
         <div class="card">
-            <h3>Time to Hire by Location</h3>
-            <p>Answer</p>
+            <h3>Time to Hire nurses by their location for 2023-2024</h3>
+            <div class="tag liveboard">Liveboard</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
         </div>
         <!-- Add more cards as needed -->
     </div>
