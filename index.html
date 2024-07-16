@@ -7,15 +7,21 @@
     <style>
         body, html {
             height: 100%;
-            width: 100%;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-image: url('background_image.png');
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .iframe-container {
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         iframe {
             width: 100%;
@@ -26,6 +32,8 @@
     </style>
 </head>
 <body>
-    <iframe src="https://clearco.thoughtspot.cloud//?embedApp=true#/embed/viz/d084c256-e284-4fc4-b80c-111cb606449a" title="Interactive Prototype"></iframe>
+    <div class="iframe-container">
+        <iframe src="https://clearco.thoughtspot.cloud//?embedApp=true#/embed/viz/d084c256-e284-4fc4-b80c-111cb606449a" title="Interactive Prototype"></iframe>
+    </div>
 </body>
 </html>
