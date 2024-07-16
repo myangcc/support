@@ -11,6 +11,38 @@
             margin: 0;
             padding: 0;
         }
+        .top-header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-header nav {
+            display: flex;
+            gap: 20px;
+        }
+        .top-header nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .top-header .right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-header .right input {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .top-header .right img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
         .header {
             background-color: #3f51b5;
             color: white;
@@ -124,6 +156,19 @@
     </style>
 </head>
 <body>
+    <div class="top-header">
+        <nav>
+            <a href="#">Me</a>
+            <a href="#">Team</a>
+            <a href="#">Company</a>
+            <a href="#">Tools</a>
+            <a href="#">My Apps</a>
+        </nav>
+        <div class="right">
+            <input type="text" placeholder="Search for a colleague">
+            <img src="avatar.png" alt="User Avatar">
+        </div>
+    </div>
     <div class="header">
         <h1>Insights in Recruiting</h1>
         <div class="search-bar-container">
