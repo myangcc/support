@@ -16,12 +16,15 @@
             color: white;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
         .search-bar-container {
             display: flex;
             justify-content: center;
-            margin: 20px;
-            position: relative;
+            margin: 20px 0;
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
         }
         .search-bar {
             display: flex;
@@ -44,12 +47,30 @@
             color: white;
             cursor: pointer;
         }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            padding-top: 10px;
+        }
+        .navigation a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .navigation a.active, .navigation a:hover {
+            background-color: #e9ecef;
+        }
         .content {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 20px;
             padding: 0 20px;
+            margin-top: 40px;
         }
         .card {
             background-color: white;
@@ -106,13 +127,19 @@
     <div class="header">
         <h1>Insights in Recruiting</h1>
         <div class="search-bar-container">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Ask a question">
-            <button onclick="search()">Search</button>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Ask a question">
+                <button onclick="search()">Search</button>
+            </div>
         </div>
     </div>
+    <div class="navigation">
+        <a href="#" class="active">Favorites</a>
+        <a href="#">Reports</a>
+        <a href="#">Liveboards</a>
+        <a href="#">Answers</a>
+        <a href="#">Benchmarking</a>
     </div>
-    
     <div class="content">
         <div class="card">
             <h3>Career Site Visitors</h3>
