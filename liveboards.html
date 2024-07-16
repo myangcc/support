@@ -7,7 +7,6 @@
     <style>
         html, body {
             height: 100%;
-            width: 100%;
             margin: 0;
         }
         body {
@@ -18,6 +17,7 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
+            width: auto;
         }
         .iframe-container {
             width: 100%;
@@ -27,7 +27,7 @@
             align-items: center;
         }
         iframe {
-            width: 100%;
+            width: 100vw; /* Use viewport width to ensure full width */
             height: 100%;
             border: none;
             box-shadow: none;
