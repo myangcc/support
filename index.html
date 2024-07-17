@@ -32,14 +32,25 @@
         .top-header .right {
             display: flex;
             align-items: center;
-            gap: 27px;
+            gap: 10px;
+        }
+        .top-header .right .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .top-header .right .search-container img {
+            position: absolute;
+            left: 10px;
+            width: 16px;
+            height: 16px;
         }
         .top-header .right input {
-            padding: 10px 30px;
+            padding: 10px 30px 10px 30px;
             border: 1px solid #ccc;
             border-radius: 20px;
         }
-        .top-header .right img {
+        .top-header .right img.avatar {
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -127,6 +138,7 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background: white;
+            position: relative;
         }
         .search-bar img {
             margin-left: 10px;
@@ -142,11 +154,21 @@
             font-size: 18px;
             position: relative;
         }
+        .search-bar .constant-placeholder {
+            position: absolute;
+            left: 10px;
+            pointer-events: none;
+            color: #aaa;
+            font-size: 18px;
+        }
         .search-bar .dynamic-placeholder {
             position: absolute;
-            left: 190px; /* Adjust this value as needed */
+            left: 210px; /* Adjust this value as needed */
             transition: opacity 0.5s ease;
-            opacity: 0;
+            opacity: 1;
+            pointer-events: none;
+            color: #aaa;
+            font-size: 18px;
         }
         .search-bar button {
             padding: 10px;
@@ -374,8 +396,11 @@
             <a href="#">My Apps</a>
         </nav>
         <div class="right">
-            <input type="text" placeholder="Search for a colleague">
-            <img src="avatar-9.png" alt="User Avatar">
+            <div class="search-container">
+                <img src="search-icon.png" alt="Search Icon">
+                <input type="text" placeholder="Search for a colleague">
+            </div>
+            <img src="avatar-9.png" alt="User Avatar" class="avatar">
         </div>
     </div>
     <div class="header">
@@ -392,7 +417,8 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try">
+                    <input type="text" id="searchInput" placeholder="Ask a question!">
+                    <span class="constant-placeholder">Try </span>
                     <span class="dynamic-placeholder" id="dynamicPlaceholder">"What sources bring in the most hires?"</span>
                     <button onclick="search()">Get Answer</button>
                 </div>
@@ -533,7 +559,6 @@
         ];
 
         let questionIndex = 0;
-        const searchInput = document.getElementById('searchInput');
         const dynamicPlaceholder = document.getElementById('dynamicPlaceholder');
 
         function updatePlaceholder() {
