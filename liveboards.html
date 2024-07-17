@@ -249,15 +249,17 @@
         <div class="create-liveboard">
             <h3>Create a Liveboard</h3>
         </div>
-        <div class="card">
-            <h3>Our Recruiting Effectiveness</h3>
-            <div class="tag liveboard">Liveboard</div>
-            <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
+        <a href="https://myangcc.github.io/analytics/liveboard">
+            <div class="card">
+                <h3>Our Recruiting Effectiveness</h3>
+                <div class="tag liveboard">Liveboard</div>
+                <div class="contributors">
+                    <img src="avatar1.png" alt="Contributor">
+                    <img src="avatar2.png" alt="Contributor">
+                    <div class="view-count">34,124 views</div>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="card">
             <h3>Time to Hire nurses by their location for 2023-2024</h3>
             <div class="tag liveboard">Liveboard</div>
@@ -299,7 +301,7 @@
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder' + encodeURIComponent(query);
+            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder?query=' + encodeURIComponent(query);
         }
     </script>
 </body>
