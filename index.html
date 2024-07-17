@@ -161,6 +161,15 @@
             width: auto;
             flex-grow: 1;
         }
+        .independent-search-bar {
+            height: 30px;
+            max-width: 300px;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
         .actions img {
             width: 20px;
             height: 20px;
@@ -271,6 +280,16 @@
             padding-right: 0px;
             padding-left: 0px;
         }
+        .sort-filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4277B8;
+            font-size: 14px;
+        }
+        .sort-filter img {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -314,25 +333,26 @@
         <a href="benchmarking.html">Benchmarking</a>
     </div>
     <div class="actions">
-        <div class="search-bar">
-            <input type="text" placeholder="Search Favorites">
-            <button onclick="searchFavorites()">Search</button>
-        </div>
-        <div class="dropdown">
-            <img src="sort-icon.png" alt="Sort Icon">
-            <div class="dropdown-menu">
-                <a href="#">Recently Created</a>
-                <a href="#">Most Viewed</a>
-                <a href="#">Alphabetical (A-Z)</a>
-                <a href="#">Alphabetical (Z-A)</a>
+        <input type="text" class="independent-search-bar" placeholder="Search Favorites">
+        <div class="sort-filter">
+            <div class="dropdown">
+                <img src="sort-icon.png" alt="Sort Icon">
+                <span>Sort</span>
+                <div class="dropdown-menu">
+                    <a href="#">Recently Created</a>
+                    <a href="#">Most Viewed</a>
+                    <a href="#">Alphabetical (A-Z)</a>
+                    <a href="#">Alphabetical (Z-A)</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <img src="filter-icon.png" alt="Filter Icon">
-            <div class="dropdown-menu">
-                <a href="#">All</a>
-                <a href="#">Created by Me</a>
-                <a href="#">Shared with Me</a>
+            <div class="dropdown">
+                <img src="filter-icon.png" alt="Filter Icon">
+                <span>Filter</span>
+                <div class="dropdown-menu">
+                    <a href="#">All</a>
+                    <a href="#">Created by Me</a>
+                    <a href="#">Shared with Me</a>
+                </div>
             </div>
         </div>
     </div>
