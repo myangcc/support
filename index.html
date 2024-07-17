@@ -127,8 +127,6 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background: white;
-            color: #121212;
-            opacity: 0.38;
         }
         .search-bar img {
             margin-left: 10px;
@@ -142,8 +140,13 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
-            color: #121212;
-            opacity: 0.38;
+            position: relative;
+        }
+        .search-bar .dynamic-placeholder {
+            position: absolute;
+            left: 190px; /* Adjust this value as needed */
+            transition: opacity 0.5s ease;
+            opacity: 0;
         }
         .search-bar button {
             padding: 10px;
@@ -358,14 +361,6 @@
         .sort-filter span {
             line-height: 20px;
         }
-        .dynamic-placeholder {
-            font-size: 18px;
-            color: #121212;
-            opacity: 0.38;
-            position: absolute;
-            transition: opacity 0.5s ease;
-            left: 215px;
-        }
     </style>
 </head>
 <body>
@@ -379,7 +374,6 @@
             <a href="#">My Apps</a>
         </nav>
         <div class="right">
-            <img src="search-icon.png" alt="Search Icon">
             <input type="text" placeholder="Search for a colleague">
             <img src="avatar-9.png" alt="User Avatar">
         </div>
@@ -398,8 +392,8 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try " disabled>
-                    <span class="dynamic-placeholder" id="dynamicPlaceholder">What sources bring in the most hires?</span>
+                    <input type="text" id="searchInput" placeholder="Ask a question!">
+                    <span class="dynamic-placeholder" id="dynamicPlaceholder">Try "What sources bring in the most hires?"</span>
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -539,13 +533,14 @@
         ];
 
         let questionIndex = 0;
+        const searchInput = document.getElementById('searchInput');
         const dynamicPlaceholder = document.getElementById('dynamicPlaceholder');
 
         function updatePlaceholder() {
             questionIndex = (questionIndex + 1) % questions.length;
             dynamicPlaceholder.style.opacity = 0;
             setTimeout(() => {
-                dynamicPlaceholder.textContent = questions[questionIndex];
+                dynamicPlaceholder.textContent = `Try "${questions[questionIndex]}"`;
                 dynamicPlaceholder.style.opacity = 1;
             }, 500);
         }
