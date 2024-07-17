@@ -51,18 +51,59 @@
             padding: 40px 20px;
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .header h1 {
             font-weight: normal;
+            font-size: 32px;
             display: inline;
         }
         .header .bold {
             font-weight: bold;
         }
+        .header .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .header .dropdown .dropbtn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .header .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .header .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .header .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .header .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .header .dropdown:hover .dropbtn {
+            background-color: #e9ecef;
+            color: #333;
+        }
         .search-bar-container {
             display: flex;
             justify-content: center;
-            margin: 0;
+            margin: 20px 0 0 0;
             width: 100%;
         }
         .search-bar {
@@ -171,48 +212,6 @@
             color: #888;
             margin-left: auto;
         }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            border-radius: 5px;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown:hover .dropbtn {
-            background-color: #e9ecef;
-        }
-        .dropbtn {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .dropdown:hover .dropbtn {
-            color: #333;
-        }
-        .logo {
-            width: 40px;
-            height: 40px;
-        }
     </style>
 </head>
 <body>
@@ -231,13 +230,14 @@
         </div>
     </div>
     <div class="header">
-        <h1>Insights in <span class="dropdown">
-            <button class="dropbtn bold">Recruiting</button>
+        <h1>Insights in </h1>
+        <span class="dropdown">
+            <button class="dropbtn">Recruiting</button>
             <div class="dropdown-content">
                 <a href="#">Performance</a>
                 <a href="#">People Analytics</a>
             </div>
-        </span></h1>
+        </span>
         <div class="search-bar-container">
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
