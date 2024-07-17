@@ -151,6 +151,13 @@
             height: 48px;
             font-size: 16px;
         }
+        .fade {
+            animation: fadeEffect 1.5s ease-in-out infinite;
+        }
+        @keyframes fadeEffect {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
         .navigation {
             display: flex;
             justify-content: flex-start;
@@ -385,7 +392,7 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" class="fade" placeholder="Ask a question! Try 'What sources bring in the most hires?'" onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -517,9 +524,22 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-        function searchFavorites() {
-            // Add search functionality here
+
+        const questions = [
+            "What sources bring in the most hires?",
+            "How many candidates is each recruiter interviewing?",
+            "Which recruiters have the slowest time to hire?"
+        ];
+
+        let questionIndex = 0;
+        const searchInput = document.getElementById('searchInput');
+
+        function updatePlaceholder() {
+            questionIndex = (questionIndex + 1) % questions.length;
+            searchInput.placeholder = `Ask a question! Try "${questions[questionIndex]}"`;
         }
+
+        setInterval(updatePlaceholder, 3000);
     </script>
 </body>
 </html>
