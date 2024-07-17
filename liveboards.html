@@ -32,12 +32,25 @@
         .top-header .right {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 10px; /* Reduced the gap to fit the search icon */
+        }
+        .top-header .right .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 5px 10px;
+            height: 25px
+        }
+        .top-header .right .search-icon {
+            width: 16px; /* Adjust the size of the search icon as needed */
+            height: 16px;
+            margin-right: 8px;
         }
         .top-header .right input {
-            padding: 5px 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: none;
+            outline: none;
+            font-size: 14px;
         }
         .top-header .right img {
             width: 24px;
@@ -45,33 +58,101 @@
             border-radius: 50%;
         }
         .header {
+            position: relative;
             background: url('banner.png') no-repeat center center;
             background-size: cover;
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px;
             text-align: center;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('overlay-banner.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        .header-content {
             position: relative;
+            z-index: 2;
+        }
+        .header h1 {
+            display: inline;
+            font-weight: normal;
+            font-size: 32px;
+        }
+        .header .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .header .dropdown .dropbtn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline;
+        }
+        .header .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .header .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 18px;
+        }
+        .header .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .header .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .header .dropdown:hover .dropbtn {
+            background-color: #ffffff1a;
         }
         .search-bar-container {
             display: flex;
             justify-content: center;
-            margin: 0;
+            margin: 20px 0 0 0;
             width: 100%;
+            padding-top: 20px;
         }
         .search-bar {
             display: flex;
+            align-items: center;
             width: 60%;
             max-width: 800px;
             border-radius: 50px;
             overflow: hidden;
+            border: 1px solid #ccc;
+            background: white;
+        }
+        .search-bar img {
+            margin-left: 10px;
+            width: 32px;
+            height: 32px;
         }
         .search-bar input {
             flex: 1;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-right: none;
+            border: none;
             outline: none;
             border-radius: 50px 0 0 50px;
+            font-size: 18px;
         }
         .search-bar button {
             padding: 10px;
@@ -80,6 +161,8 @@
             color: white;
             cursor: pointer;
             border-radius: 0 50px 50px 0;
+            height: 48px;
+            font-size: 16px;
         }
         .navigation {
             display: flex;
@@ -96,6 +179,53 @@
         .navigation a.active, .navigation a:hover {
             background-color: #e9ecef;
         }
+        .actions {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 20px;
+        }
+        .actions .search-bar {
+            width: auto;
+            flex-grow: 1;
+        }
+        .independent-search-bar {
+            height: 30px;
+            min-width: 300px;
+            max-width: 300px;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        .actions img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
         .content {
             display: flex;
             justify-content: flex-start;
@@ -104,13 +234,25 @@
             padding: 0 20px;
             margin-top: 20px;
         }
+        a.card {
+            text-decoration: none;
+        }
         .card, .create-liveboard {
+            position: relative;
             background-color: white;
-            width: 200px;
+            width: 250px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer; /* Makes the card clickable */
+            transition: transform 0.2s; /* Adds smooth transition for the hover effect */
+        }
+        .card:hover, .create-liveboard:hover {
+            transform: scale(1.02); /* Slightly grows the card on hover */
         }
         .create-liveboard {
             display: flex;
@@ -119,14 +261,14 @@
             border: 2px dotted #007bff;
             cursor: pointer;
         }
-        .create-liveboard h3 {
-            font-size: 16px;
-            color: #007bff;
-        }
         .card h3 {
             font-size: 16px;
             margin: 0 0 10px;
             color: #333;
+        }
+        .create-liveboard h3 {
+            font-size: 16px;
+            color: #007bff;
         }
         .card p {
             font-size: 14px;
@@ -139,19 +281,30 @@
             border-radius: 12px;
             font-size: 12px;
             color: white;
-            background-color: #6c757d;
+            background-color: #8B3C67;
             margin-top: 10px;
+            margin-bottom: 10px;
         }
         .card .tag.answer {
-            background-color: #007bff;
+            background-color: #016BEA;
         }
         .card .tag.liveboard {
             background-color: #6f42c1;
+            margin-bottom: 10px;
+        }
+        .tag-date-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #888;
+            padding-bottom: 5px;
         }
         .contributors {
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            border-top: 1px solid #E3E3E3;
+            padding-top: 10px;
         }
         .contributors img {
             width: 20px;
@@ -160,51 +313,67 @@
             margin-right: 5px;
         }
         .view-count {
+            display: flex;
+            align-items: center;
             font-size: 12px;
             color: #888;
             margin-left: auto;
         }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: white;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            border-radius: 5px;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        .dropdown:hover .dropbtn {
-            background-color: #e9ecef;
-        }
-        .dropbtn {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .dropdown:hover .dropbtn {
-            color: #333;
+        .view-count img {
+            margin-right: 5px;
+            vertical-align: middle;
         }
         .logo {
             width: 40px;
             height: 40px;
+        }
+        .arrow-icon {
+            width: 18px;
+            height: 12px;
+            padding-bottom: 5px;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        .star-icon-magenta {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-magenta.png') no-repeat center center;
+            background-size: contain;
+        }
+        .star-icon-purple {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-purple.png') no-repeat center center;
+            background-size: contain;
+        }
+        .star-icon-blue {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-blue.png') no-repeat center center;
+            background-size: contain;
+        }
+        .sort-filter {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #4277B8;
+            font-size: 14px;
+        }
+        .sort-filter img {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .sort-filter span {
+            line-height: 20px;
         }
     </style>
 </head>
@@ -219,31 +388,63 @@
             <a href="#">My Apps</a>
         </nav>
         <div class="right">
-            <input type="text" placeholder="Search for a colleague">
-            <img src="avatar.png" alt="User Avatar">
+            <div class="search-container">
+                <img src="search-icon.png" alt="Search Icon" class="search-icon">
+                <input type="text" placeholder="Search for a colleague">
+            </div>
+            <img src="avatar-9.png" alt="User Avatar">
         </div>
     </div>
     <div class="header">
-        <h1>Insights in <span class="dropdown">
-            <button class="dropbtn">Recruiting</button>
-            <div class="dropdown-content">
-                <a href="#">Performance</a>
-                <a href="#">People Analytics</a>
-            </div>
-        </span></h1>
-        <div class="search-bar-container">
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
-                <button onclick="search()">Search</button>
+        <div class="header-content">
+            <h1>Insights in <span class="dropdown">
+                <button class="dropbtn">Recruiting</button>
+                <div class="dropdown-content">
+                    <a href="#">Performance</a>
+                    <a href="#">People Analytics</a>
+                </div>
+            </span>
+                <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
+            </h1>
+            <div class="search-bar-container">
+                <div class="search-bar">
+                    <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
+                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                    <button onclick="search()">Get Answer</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="navigation">
-        <a href="index.html">Favorites</a>
-        <a href="#">Reports</a>
-        <a href="#" class="active">Liveboards</a>
-        <a href="#">Answers</a>
-        <a href="#">Benchmarking</a>
+        <a href="index.html" class="active">Favorites</a>
+        <a href="reports.html">Reports</a>
+        <a href="liveboards.html">Liveboards</a>
+        <a href="answers.html">Answers</a>
+        <a href="benchmarking.html">Benchmarking</a>
+    </div>
+    <div class="actions">
+        <input type="text" class="independent-search-bar" placeholder="Search Favorites">
+        <div class="sort-filter">
+            <div class="dropdown">
+                <img src="sort-icon.png" alt="Sort Icon">
+                <span>Sort</span>
+                <div class="dropdown-menu">
+                    <a href="#">Recently Created</a>
+                    <a href="#">Most Viewed</a>
+                    <a href="#">Alphabetical (A-Z)</a>
+                    <a href="#">Alphabetical (Z-A)</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <img src="filter-icon.png" alt="Filter Icon">
+                <span>Filter</span>
+                <div class="dropdown-menu">
+                    <a href="#">All</a>
+                    <a href="#">Created by Me</a>
+                    <a href="#">Shared with Me</a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content">
         <div class="create-liveboard">
@@ -260,48 +461,87 @@
                 </div>
             </div>
         </a>
-        <div class="card">
+        <a href="#" class="card">
             <h3>Time to Hire nurses by their location for 2023-2024</h3>
-            <div class="tag liveboard">Liveboard</div>
-            <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
+            <div class="star-icon-purple"></div>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Jun 1, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-3.png" alt="Contributor">
+                    <img src="avatar-4.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        2,244
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card">
+        </a>
+        <a href="#" class="card">
             <h3>Another card to add</h3>
-            <div class="tag liveboard">Liveboard</div>
-            <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
+            <div class="star-icon-purple"></div>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag answer">Liveboard</div>
+                    <span>Updated Feb 15, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-5.png" alt="Contributor">
+                    <img src="avatar-6.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        942
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card">
+        </a>
+        <a href="#" class="card">
             <h3>Once again a new card to add</h3>
-            <div class="tag liveboard">Liveboard</div>
-            <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
+            <div class="star-icon-purple"></div>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Apr 3, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-7.png" alt="Contributor">
+                    <img src="avatar-8.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        735
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card">
+        </a>
+        <a href="#" class="card">
             <h3>Cards for everyone</h3>
-            <div class="tag liveboard">Liveboard</div>
-            <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
+            <div class="star-icon-purple"></div>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Mar 10, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-9.png" alt="Contributor">
+                    <img src="avatar-2.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        491
+                    </div>
+                </div>
             </div>
-        </div>
+        </a>
         <!-- Add more cards as needed -->
     </div>
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
+        }
+        function searchFavorites() {
+            // Add search functionality here
         }
     </script>
 </body>
