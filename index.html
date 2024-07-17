@@ -140,6 +140,13 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
+            position: relative;
+        }
+        .search-bar .dynamic-placeholder {
+            position: absolute;
+            left: 190px; /* Adjust this value as needed */
+            transition: opacity 0.5s ease;
+            opacity: 0;
         }
         .search-bar button {
             padding: 10px;
@@ -150,13 +157,6 @@
             border-radius: 0 50px 50px 0;
             height: 48px;
             font-size: 16px;
-        }
-        .fade {
-            animation: fadeEffect 1.5s ease-in-out infinite;
-        }
-        @keyframes fadeEffect {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
         }
         .navigation {
             display: flex;
@@ -392,7 +392,8 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" class="fade" placeholder="Ask a question! Try 'What sources bring in the most hires?'" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question!">
+                    <span class="dynamic-placeholder" id="dynamicPlaceholder">Try "What sources bring in the most hires?"</span>
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -533,10 +534,15 @@
 
         let questionIndex = 0;
         const searchInput = document.getElementById('searchInput');
+        const dynamicPlaceholder = document.getElementById('dynamicPlaceholder');
 
         function updatePlaceholder() {
             questionIndex = (questionIndex + 1) % questions.length;
-            searchInput.placeholder = `Ask a question! Try "${questions[questionIndex]}"`;
+            dynamicPlaceholder.style.opacity = 0;
+            setTimeout(() => {
+                dynamicPlaceholder.textContent = `Try "${questions[questionIndex]}"`;
+                dynamicPlaceholder.style.opacity = 1;
+            }, 500);
         }
 
         setInterval(updatePlaceholder, 3000);
