@@ -27,6 +27,7 @@
             font-weight: normal;
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
         .header img {
             margin-right: 8px;
@@ -39,7 +40,7 @@
         }
         .iframe-container {
             width: 100%;
-            height: calc(100vh - 50px);
+            height: calc(100vh - 60px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -54,7 +55,7 @@
 </head>
 <body>
     <div class="header">
-        <a href="https://myangcc.github.io/analytics">
+        <a onclick="history.back()">
             <img src="back-arrow.png" alt="Back">
             Back to previous page
         </a>
