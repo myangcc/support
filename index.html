@@ -51,17 +51,11 @@
             padding: 40px 20px;
             text-align: center;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         .header h1 {
+            display: inline;
             font-weight: normal;
             font-size: 32px;
-            display: inline;
-        }
-        .header .bold {
-            font-weight: bold;
         }
         .header .dropdown {
             position: relative;
@@ -74,6 +68,7 @@
             font-size: 32px;
             cursor: pointer;
             font-weight: bold;
+            display: inline;
         }
         .header .dropdown-content {
             display: none;
@@ -212,6 +207,10 @@
             color: #888;
             margin-left: auto;
         }
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
@@ -230,14 +229,13 @@
         </div>
     </div>
     <div class="header">
-        <h1>Insights in </h1>
-        <span class="dropdown">
+        <h1>Insights in <span class="dropdown">
             <button class="dropbtn">Recruiting</button>
             <div class="dropdown-content">
                 <a href="#">Performance</a>
                 <a href="#">People Analytics</a>
             </div>
-        </span>
+        </span></h1>
         <div class="search-bar-container">
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
