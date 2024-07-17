@@ -151,6 +151,43 @@
         .navigation a.active, .navigation a:hover {
             background-color: #e9ecef;
         }
+        .actions {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 20px;
+        }
+        .actions .search-bar {
+            width: auto;
+            flex-grow: 1;
+        }
+        .actions img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
         .content {
             display: flex;
             justify-content: flex-start;
@@ -276,6 +313,29 @@
         <a href="answers.html">Answers</a>
         <a href="benchmarking.html">Benchmarking</a>
     </div>
+    <div class="actions">
+        <div class="search-bar">
+            <input type="text" placeholder="Search Favorites">
+            <button onclick="searchFavorites()">Search</button>
+        </div>
+        <div class="dropdown">
+            <img src="sort-icon.png" alt="Sort Icon">
+            <div class="dropdown-menu">
+                <a href="#">Recently Created</a>
+                <a href="#">Most Viewed</a>
+                <a href="#">Alphabetical (A-Z)</a>
+                <a href="#">Alphabetical (Z-A)</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <img src="filter-icon.png" alt="Filter Icon">
+            <div class="dropdown-menu">
+                <a href="#">All</a>
+                <a href="#">Created by Me</a>
+                <a href="#">Shared with Me</a>
+            </div>
+        </div>
+    </div>
     <div class="content">
         <div class="card">
             <h3>Career Site Visitors</h3>
@@ -338,6 +398,9 @@
         function search() {
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
+        }
+        function searchFavorites() {
+            // Add search functionality here
         }
     </script>
 </body>
