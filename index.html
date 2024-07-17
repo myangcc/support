@@ -52,6 +52,23 @@
             text-align: center;
             position: relative;
         }
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('overlay-banner.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        .header h1,
+        .header .dropdown {
+            position: relative;
+            z-index: 1;
+        }
         .header h1 {
             display: inline;
             font-weight: normal;
@@ -293,7 +310,6 @@
         }
         .sort-filter span {
             line-height: 20px; /* Matches the height of the icons */
-        }
         }
     </style>
 </head>
