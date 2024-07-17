@@ -54,14 +54,14 @@
 </head>
 <body>
     <div class="header">
-        <a href="https://myangcc.github.io/analytics">
+        <a href="https://myangcc.github.io/liveboards">
             <img src="back-arrow.png" alt="Back">
             Back to previous page
         </a>
-        <span>Answer</span>
+        <span>Liveboard</span>
     </div>
     <div class="iframe-container">
-        <iframe src="https://clearco.thoughtspot.cloud/?embedApp=true&isSageEmbed#/embed/eureka?query=how many recruiters&executeSearch=true"></iframe>
+        <iframe src="https://clearco.thoughtspot.cloud/?embedApp=true#/embed/viz/6afea07a-17ad-44ee-86f1-46bfae537298/tab/032c643a-2ebf-4277-af07-7581a546e2bf" title="Interactive Prototype"></iframe>
     </div>
 </body>
 </html>
