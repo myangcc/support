@@ -32,12 +32,16 @@
         .top-header .right {
             display: flex;
             align-items: center;
-            gap: 27px;
+            gap: 10px; /* Reduced the gap to fit the search icon */
         }
         .top-header .right input {
             padding: 10px 30px;
             border: 1px solid #ccc;
             border-radius: 20px;
+        }
+        .top-header .right .search-icon {
+            width: 20px; /* Adjust the size of the search icon as needed */
+            height: 20px;
         }
         .top-header .right img {
             width: 24px;
@@ -140,14 +144,6 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
-            color: rgba(18, 18, 18, 0.38);
-        }
-        .search-bar .dynamic-placeholder {
-            position: absolute;
-            left: 180px; /* Adjust this value as needed */
-            transition: opacity 0.5s ease;
-            opacity: 0;
-            color: rgba(18, 18, 18, 0.38);
         }
         .search-bar button {
             padding: 10px;
@@ -375,6 +371,7 @@
             <a href="#">My Apps</a>
         </nav>
         <div class="right">
+            <img src="search-icon.png" alt="Search Icon" class="search-icon">
             <input type="text" placeholder="Search for a colleague">
             <img src="avatar-9.png" alt="User Avatar">
         </div>
@@ -393,8 +390,7 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try">
-                    <span class="dynamic-placeholder" id="dynamicPlaceholder">"What sources bring in the most hires?"</span>
+                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -526,36 +522,9 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-
-        const questions = [
-            "What sources bring in the most hires?",
-            "How many candidates is each recruiter interviewing?",
-            "Which recruiters have the slowest time to hire?"
-        ];
-
-        let questionIndex = 0;
-        const searchInput = document.getElementById('searchInput');
-        const dynamicPlaceholder = document.getElementById('dynamicPlaceholder');
-
-        function updatePlaceholder() {
-            questionIndex = (questionIndex + 1) % questions.length;
-            dynamicPlaceholder.style.opacity = 0;
-            setTimeout(() => {
-                dynamicPlaceholder.textContent = `Try "${questions[questionIndex]}"`;
-                dynamicPlaceholder.style.opacity = 1;
-            }, 500);
+        function searchFavorites() {
+            // Add search functionality here
         }
-
-        setInterval(updatePlaceholder, 3000);
-
-        searchInput.addEventListener('input', () => {
-            const inputValue = searchInput.value.trim();
-            if (inputValue.length > 0) {
-                dynamicPlaceholder.style.opacity = 0;
-            } else {
-                dynamicPlaceholder.style.opacity = 1;
-            }
-        });
     </script>
 </body>
 </html>
