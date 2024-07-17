@@ -222,7 +222,7 @@
         </span></h1>
         <div class="search-bar-container">
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Ask a question">
+                <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
                 <button onclick="search()">Search</button>
             </div>
         </div>
@@ -275,5 +275,4 @@
             <h3>Cards for everyone</h3>
             <div class="tag liveboard">Liveboard</div>
             <div class="contributors">
-                <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png
+                <img src="avatar1.png" alt="
