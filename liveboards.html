@@ -375,6 +375,9 @@
         .sort-filter span {
             line-height: 20px;
         }
+        .search-bar input::placeholder {
+            color: rgba(18, 18, 18, 0.38);
+        }
     </style>
 </head>
 <body>
@@ -409,7 +412,7 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try "Which source has the most hires from?"" onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
