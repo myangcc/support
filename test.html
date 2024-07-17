@@ -22,6 +22,7 @@
         .top-header nav {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
         .top-header nav a {
             text-decoration: none;
@@ -190,11 +191,16 @@
         .dropdown:hover .dropbtn {
             color: #333;
         }
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
     </style>
 </head>
 <body>
     <div class="top-header">
         <nav>
+            <img src="logo.png" alt="Logo" class="logo">
             <a href="#">Me</a>
             <a href="#">Team</a>
             <a href="#">Company</a>
@@ -270,17 +276,4 @@
             <div class="tag liveboard">Liveboard</div>
             <div class="contributors">
                 <img src="avatar1.png" alt="Contributor">
-                <img src="avatar2.png" alt="Contributor">
-                <div class="view-count">34,124 views</div>
-            </div>
-        </div>
-        <!-- Add more cards as needed -->
-    </div>
-    <script>
-        function search() {
-            var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/?query=' + encodeURIComponent(query);
-        }
-    </script>
-</body>
-</html>
+                <img src="avatar2.png
