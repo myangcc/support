@@ -126,6 +126,13 @@
             cursor: pointer;
             border-radius: 0 50px 50px 0;
         }
+        .search-bar .ai-icon {
+            margin-left: 10px;
+            margin-right: -30px;
+            width: 24px;
+            height: 24px;
+            align-self: center;
+        }
         .navigation {
             display: flex;
             justify-content: flex-start;
@@ -249,6 +256,7 @@
         </h1>
         <div class="search-bar-container">
             <div class="search-bar">
+                <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
                 <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
                 <button onclick="search()">Search</button>
             </div>
