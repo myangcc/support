@@ -45,14 +45,22 @@
             border-radius: 50%;
         }
         .header {
-            background: url('banner.png') no-repeat center center;
-            background-size: cover;
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
             position: relative;
+            text-align: center;
+            color: white;
         }
         .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            z-index: 0;
+        }
+        .header::after {
             content: "";
             position: absolute;
             top: 0;
@@ -62,12 +70,12 @@
             background: url('overlay-banner.png') no-repeat center center;
             background-size: cover;
             opacity: 0.5;
-            z-index: 0;
-        }
-        .header h1,
-        .header .dropdown {
-            position: relative;
             z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 50px 20px;
         }
         .header h1 {
             display: inline;
@@ -93,7 +101,7 @@
             background-color: white;
             min-width: 160px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            z-index: 3;
             border-radius: 5px;
         }
         .header .dropdown-content a {
@@ -115,9 +123,9 @@
         .search-bar-container {
             display: flex;
             justify-content: center;
-            margin: 20px 0 0 0;
             width: 100%;
             padding-top: 20px;
+            z-index: 2;
         }
         .search-bar {
             display: flex;
@@ -329,20 +337,22 @@
         </div>
     </div>
     <div class="header">
-        <h1>Insights in <span class="dropdown">
-            <button class="dropbtn">Recruiting</button>
-            <div class="dropdown-content">
-                <a href="#">Performance</a>
-                <a href="#">People Analytics</a>
-            </div>
-        </span>
-            <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
-        </h1>
-        <div class="search-bar-container">
-            <div class="search-bar">
-                <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
-                <button onclick="search()">Get Answer</button>
+        <div class="header-content">
+            <h1>Insights in <span class="dropdown">
+                <button class="dropbtn">Recruiting</button>
+                <div class="dropdown-content">
+                    <a href="#">Performance</a>
+                    <a href="#">People Analytics</a>
+                </div>
+            </span>
+                <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
+            </h1>
+            <div class="search-bar-container">
+                <div class="search-bar">
+                    <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
+                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                    <button onclick="search()">Get Answer</button>
+                </div>
             </div>
         </div>
     </div>
@@ -385,7 +395,9 @@
                 <div class="contributors">
                     <img src="avatar-1.png" alt="Contributor">
                     <img src="avatar-10.png" alt="Contributor">
-                    <div class="view-count">4,450 views</div>
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="Views"> 4,450
+                    </div>
                 </div>
             </div>
         </div>
@@ -396,7 +408,9 @@
                 <div class="contributors">
                     <img src="avatar-3.png" alt="Contributor">
                     <img src="avatar-4.png" alt="Contributor">
-                    <div class="view-count">2,244 views</div>
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="Views"> 2,244
+                    </div>
                 </div>
             </div>
         </div>
@@ -407,7 +421,9 @@
                 <div class="contributors">
                     <img src="avatar-5.png" alt="Contributor">
                     <img src="avatar-6.png" alt="Contributor">
-                    <div class="view-count">942 views</div>
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="Views"> 942
+                    </div>
                 </div>
             </div>
         </div>
@@ -418,7 +434,9 @@
                 <div class="contributors">
                     <img src="avatar-7.png" alt="Contributor">
                     <img src="avatar-8.png" alt="Contributor">
-                    <div class="view-count">735 views</div>
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="Views"> 735
+                    </div>
                 </div>
             </div>
         </div>
@@ -429,7 +447,9 @@
                 <div class="contributors">
                     <img src="avatar-9.png" alt="Contributor">
                     <img src="avatar-2.png" alt="Contributor">
-                    <div class="view-count">491 views</div>
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="Views"> 491
+                    </div>
                 </div>
             </div>
         </div>
