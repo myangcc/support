@@ -392,8 +392,8 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question!">
-                    <span class="dynamic-placeholder" id="dynamicPlaceholder">Try "What sources bring in the most hires?"</span>
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try">
+                    <span class="dynamic-placeholder" id="dynamicPlaceholder">"What sources bring in the most hires?"</span>
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -540,7 +540,7 @@
             questionIndex = (questionIndex + 1) % questions.length;
             dynamicPlaceholder.style.opacity = 0;
             setTimeout(() => {
-                dynamicPlaceholder.textContent = `Try "${questions[questionIndex]}"`;
+                dynamicPlaceholder.textContent = `"${questions[questionIndex]}"`;
                 dynamicPlaceholder.style.opacity = 1;
             }, 500);
         }
