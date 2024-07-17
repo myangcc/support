@@ -46,27 +46,19 @@
         }
         .header {
             position: relative;
-            text-align: center;
-            color: white;
-        }
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: url('banner.png') no-repeat center center;
             background-size: cover;
-            z-index: 0;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
         }
         .header::after {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: url('overlay-banner.png') no-repeat center center;
             background-size: cover;
             opacity: 0.5;
@@ -75,7 +67,6 @@
         .header-content {
             position: relative;
             z-index: 2;
-            padding: 50px 20px;
         }
         .header h1 {
             display: inline;
@@ -101,7 +92,7 @@
             background-color: white;
             min-width: 160px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 3;
+            z-index: 1;
             border-radius: 5px;
         }
         .header .dropdown-content a {
@@ -123,9 +114,9 @@
         .search-bar-container {
             display: flex;
             justify-content: center;
+            margin: 20px 0 0 0;
             width: 100%;
             padding-top: 20px;
-            z-index: 2;
         }
         .search-bar {
             display: flex;
@@ -231,6 +222,7 @@
             margin-top: 20px;
         }
         .card, .create-liveboard {
+            position: relative;
             background-color: white;
             width: 200px;
             padding: 20px;
@@ -268,12 +260,12 @@
             border-radius: 12px;
             font-size: 12px;
             color: white;
-            background-color: #6c757d;
+            background-color: #8B3C67;
             margin-top: 10px;
             margin-bottom: 10px;
         }
         .card .tag.answer {
-            background-color: #007bff;
+            background-color: #016BEA;
         }
         .card .tag.liveboard {
             background-color: #6f42c1;
@@ -290,9 +282,15 @@
             margin-right: 5px;
         }
         .view-count {
+            display: flex;
+            align-items: center;
             font-size: 12px;
             color: #888;
             margin-left: auto;
+        }
+        .view-count img {
+            margin-right: 5px;
+            vertical-align: middle;
         }
         .logo {
             width: 40px;
@@ -304,6 +302,24 @@
             padding-bottom: 5px;
             padding-right: 0px;
             padding-left: 0px;
+        }
+        .star-icon-purple {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-purple.png') no-repeat center center;
+            background-size: contain;
+        }
+        .star-icon-blue {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-blue.png') no-repeat center center;
+            background-size: contain;
         }
         .sort-filter {
             display: flex;
@@ -317,7 +333,7 @@
             vertical-align: middle;
         }
         .sort-filter span {
-            line-height: 20px; /* Matches the height of the icons */
+            line-height: 20px;
         }
     </style>
 </head>
@@ -390,65 +406,75 @@
     <div class="content">
         <div class="card">
             <h3>Career Site Visitors</h3>
+            <div class="star-icon-magenta"></div>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
                 <div class="contributors">
                     <img src="avatar-1.png" alt="Contributor">
                     <img src="avatar-10.png" alt="Contributor">
                     <div class="view-count">
-                        <img src="view-icon.png" alt="Views"> 4,450
+                        <img src="view-icon.png" alt="View Icon">
+                        4,450
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
             <h3>Time to Hire nurses by their location for 2023-2024</h3>
+            <div class="star-icon-purple"></div>
             <div class="bottom-content">
                 <div class="tag liveboard">Liveboard</div>
                 <div class="contributors">
                     <img src="avatar-3.png" alt="Contributor">
                     <img src="avatar-4.png" alt="Contributor">
                     <div class="view-count">
-                        <img src="view-icon.png" alt="Views"> 2,244
+                        <img src="view-icon.png" alt="View Icon">
+                        2,244
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
             <h3>Another card to add</h3>
+            <div class="star-icon-blue"></div>
             <div class="bottom-content">
-                <div class="tag liveboard">Liveboard</div>
+                <div class="tag answer">Answer</div>
                 <div class="contributors">
                     <img src="avatar-5.png" alt="Contributor">
                     <img src="avatar-6.png" alt="Contributor">
                     <div class="view-count">
-                        <img src="view-icon.png" alt="Views"> 942
+                        <img src="view-icon.png" alt="View Icon">
+                        942
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
             <h3>Once again a new card to add</h3>
+            <div class="star-icon-purple"></div>
             <div class="bottom-content">
                 <div class="tag liveboard">Liveboard</div>
                 <div class="contributors">
                     <img src="avatar-7.png" alt="Contributor">
                     <img src="avatar-8.png" alt="Contributor">
                     <div class="view-count">
-                        <img src="view-icon.png" alt="Views"> 735
+                        <img src="view-icon.png" alt="View Icon">
+                        735
                     </div>
                 </div>
             </div>
         </div>
         <div class="card">
             <h3>Cards for everyone</h3>
+            <div class="star-icon-purple"></div>
             <div class="bottom-content">
                 <div class="tag liveboard">Liveboard</div>
                 <div class="contributors">
                     <img src="avatar-9.png" alt="Contributor">
                     <img src="avatar-2.png" alt="Contributor">
                     <div class="view-count">
-                        <img src="view-icon.png" alt="Views"> 491
+                        <img src="view-icon.png" alt="View Icon">
+                        491
                     </div>
                 </div>
             </div>
