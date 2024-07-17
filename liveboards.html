@@ -104,13 +104,24 @@
             padding: 0 20px;
             margin-top: 20px;
         }
-        .card {
+        .card, .create-liveboard {
             background-color: white;
             width: 200px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             text-align: left;
+        }
+        .create-liveboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dotted #007bff;
+            cursor: pointer;
+        }
+        .create-liveboard h3 {
+            font-size: 16px;
+            color: #007bff;
         }
         .card h3 {
             font-size: 16px;
@@ -228,13 +239,16 @@
         </div>
     </div>
     <div class="navigation">
-        <a href="#" class="active">Favorites</a>
+        <a href="#">Favorites</a>
         <a href="#">Reports</a>
-        <a href="#">Liveboards</a>
+        <a href="#" class="active">Liveboards</a>
         <a href="#">Answers</a>
         <a href="#">Benchmarking</a>
     </div>
     <div class="content">
+        <div class="create-liveboard">
+            <h3>Create a Liveboard</h3>
+        </div>
         <div class="card">
             <h3>Career Site Visitors</h3>
             <div class="tag report">Report</div>
@@ -285,7 +299,7 @@
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/AIAnswerBuilder?query=' + encodeURIComponent(query);
+            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder' + encodeURIComponent(query);
         }
     </script>
 </body>
