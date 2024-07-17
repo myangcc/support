@@ -62,7 +62,17 @@
         <span>Answer</span>
     </div>
     <div class="iframe-container">
-        <iframe src="https://clearco.thoughtspot.cloud/?embedApp=true&isSageEmbed#/embed/eureka?query=how many recruiters&executeSearch=true"></iframe>
+        <iframe id="answerIframe" src=""></iframe>
     </div>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const query = getQueryParam('query');
+        const iframe = document.getElementById('answerIframe');
+        iframe.src = `https://clearco.thoughtspot.cloud/?embedApp=true&isSageEmbed#/embed/eureka?query=${encodeURIComponent(query)}&executeSearch=true`;
+    </script>
 </body>
 </html>
