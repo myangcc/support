@@ -127,6 +127,8 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background: white;
+            color: #121212;
+            opacity: 0.38;
         }
         .search-bar img {
             margin-left: 10px;
@@ -140,6 +142,8 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
+            color: #121212;
+            opacity: 0.38;
         }
         .search-bar button {
             padding: 10px;
@@ -354,6 +358,14 @@
         .sort-filter span {
             line-height: 20px;
         }
+        .dynamic-placeholder {
+            font-size: 18px;
+            color: #121212;
+            opacity: 0.38;
+            position: absolute;
+            transition: opacity 0.5s ease;
+            left: 215px;
+        }
     </style>
 </head>
 <body>
@@ -367,6 +379,7 @@
             <a href="#">My Apps</a>
         </nav>
         <div class="right">
+            <img src="search-icon.png" alt="Search Icon">
             <input type="text" placeholder="Search for a colleague">
             <img src="avatar-9.png" alt="User Avatar">
         </div>
@@ -385,7 +398,8 @@
             <div class="search-bar-container">
                 <div class="search-bar">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try " disabled>
+                    <span class="dynamic-placeholder" id="dynamicPlaceholder">What sources bring in the most hires?</span>
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -517,9 +531,26 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-        function searchFavorites() {
-            // Add search functionality here
+
+        const questions = [
+            "What sources bring in the most hires?",
+            "How many candidates is each recruiter interviewing?",
+            "Which recruiters have the slowest time to hire?"
+        ];
+
+        let questionIndex = 0;
+        const dynamicPlaceholder = document.getElementById('dynamicPlaceholder');
+
+        function updatePlaceholder() {
+            questionIndex = (questionIndex + 1) % questions.length;
+            dynamicPlaceholder.style.opacity = 0;
+            setTimeout(() => {
+                dynamicPlaceholder.textContent = questions[questionIndex];
+                dynamicPlaceholder.style.opacity = 1;
+            }, 500);
         }
+
+        setInterval(updatePlaceholder, 3000);
     </script>
 </body>
 </html>
