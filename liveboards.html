@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights in Recruiting</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        .top-header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .top-header nav a {
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+        }
+        .top-header .right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .top-header .right input {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .top-header .right img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .header {
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            width: 100%;
+        }
+        .search-bar {
+            display: flex;
+            width: 60%;
+            max-width: 800px;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none;
+            outline: none;
+            border-radius: 50px 0 0 50px;
+        }
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 50px 50px 0;
+        }
+        .navigation {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        .navigation a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+        }
+        .navigation a.active, .navigation a:hover {
+            background-color: #e9ecef;
+        }
+        .content {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: white;
+            width: 200px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: left;
+        }
+        .card h3 {
+            font-size: 16px;
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+        .card .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
+        .card .tag.answer {
+            background-color: #007bff;
+        }
+        .card .tag.liveboard {
+            background-color: #6f42c1;
+        }
+        .contributors {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .contributors img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .view-count {
+            font-size: 12px;
+            color: #888;
+            margin-left: auto;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #e9ecef;
+        }
+        .dropbtn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .dropdown:hover .dropbtn {
+            color: #333;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <nav>
+            <img src="logo.png" alt="Logo" class="logo">
+            <a href="#">Me</a>
+            <a href="#">Team</a>
+            <a href="#">Company</a>
+            <a href="#">Tools</a>
+            <a href="#">My Apps</a>
+        </nav>
+        <div class="right">
+            <input type="text" placeholder="Search for a colleague">
+            <img src="avatar.png" alt="User Avatar">
+        </div>
+    </div>
+    <div class="header">
+        <h1>Insights in <span class="dropdown">
+            <button class="dropbtn">Recruiting</button>
+            <div class="dropdown-content">
+                <a href="#">Performance</a>
+                <a href="#">People Analytics</a>
+            </div>
+        </span></h1>
+        <div class="search-bar-container">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Ask a question" onkeydown="if(event.key === 'Enter') search()">
+                <button onclick="search()">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <a href="#" class="active">Favorites</a>
+        <a href="#">Reports</a>
+        <a href="#">Liveboards</a>
+        <a href="#">Answers</a>
+        <a href="#">Benchmarking</a>
+    </div>
+    <div class="content">
+        <div class="card">
+            <h3>Career Site Visitors</h3>
+            <div class="tag report">Report</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Time to Hire nurses by their location for 2023-2024</h3>
+            <div class="tag liveboard">Liveboard</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Another card to add</h3>
+            <div class="tag liveboard">Liveboard</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Once again a new card to add</h3>
+            <div class="tag liveboard">Liveboard</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
+        </div>
+        <div class="card">
+            <h3>Cards for everyone</h3>
+            <div class="tag liveboard">Liveboard</div>
+            <div class="contributors">
+                <img src="avatar1.png" alt="Contributor">
+                <img src="avatar2.png" alt="Contributor">
+                <div class="view-count">34,124 views</div>
+            </div>
+        </div>
+        <!-- Add more cards as needed -->
+    </div>
+    <script>
+        function search() {
+            var query = document.getElementById("searchInput").value;
+            window.location.href = 'https://myangcc.github.io/analytics/AIAnswerBuilder?query=' + encodeURIComponent(query);
+        }
+    </script>
+</body>
+</html>
