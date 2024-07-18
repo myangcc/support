@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            height: 60px;
+        }
+        .header a {
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            margin-right: 8px;
+        }
+        .header span {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+        }
+        .report-container {
+            width: 100%;
+            height: calc(100vh - 50px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f6f8;
+        }
+        .report-container img {
+            width: 100%;
+            height: auto;
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a onclick="history.back()">
+            <img src="back-arrow.png" alt="Back">
+            Back to previous page
+        </a>
+        <span>Liveboard</span>
+    </div>
+    <div class="report-container">
+        <img src="report3.png" alt="Report Image">
+    </div>
+</body>
+</html>
