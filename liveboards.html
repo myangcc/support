@@ -385,6 +385,52 @@
         .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
         }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -428,7 +474,7 @@
     <div class="navigation">
         <a href="index.html">Favorites</a>
         <a href="reports.html">Reports</a>
-        <a href="liveboards.html"class="active">Liveboards</a>
+        <a href="liveboards.html" class="active">Liveboards</a>
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
     </div>
@@ -457,7 +503,7 @@
         </div>
     </div>
     <div class="content">
-        <div class="create-liveboard">
+        <div class="create-liveboard" onclick="openModal()">
             <img src="create-icon.png" alt="Create Icon">
             <h3>Create a Liveboard</h3>
         </div>
@@ -550,13 +596,46 @@
         </a>
         <!-- Add more cards as needed -->
     </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>You'll be able to create a Liveboard with this, but not in this prototype. Please close and continue.</p>
+            <button class="modal-button" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-        function searchFavorites() {
-            // Add search functionality here
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.querySelector(".create-liveboard");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        function openModal() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
         }
     </script>
 </body>
