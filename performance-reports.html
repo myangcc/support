@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights in Performance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        .top-header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-header nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .top-header nav a {
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+        }
+        .top-header .right {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Reduced the gap to fit the search icon */
+        }
+        .top-header .right .search-container {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 5px 10px;
+            height: 25px
+        }
+        .top-header .right .search-icon {
+            width: 16px; /* Adjust the size of the search icon as needed */
+            height: 16px;
+            margin-right: 8px;
+        }
+        .top-header .right input {
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+        .top-header .right img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+        .header {
+            position: relative;
+            background: url('banner.png') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('overlay-banner.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        .header h1 {
+            display: inline;
+            font-weight: normal;
+            font-size: 32px;
+        }
+        .header .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .header .dropdown .dropbtn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline;
+        }
+        .header .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .header .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 18px;
+        }
+        .header .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .header .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .header .dropdown:hover .dropbtn {
+            background-color: #ffffff1a;
+        }
+        .search-bar-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 0 0;
+            width: 100%;
+            padding-top: 20px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 60%;
+            max-width: 800px;
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background: white;
+        }
+        .search-bar img {
+            margin-left: 10px;
+            width: 32px;
+            height: 32px;
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 18px;
+        }
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 50px 50px 0;
+            height: 48px;
+            font-size: 16px;
+        }
+        .navigation {
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 20px;
+            margin-top: 10px;
+            gap: 5px;
+        }
+        .navigation a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+        }
+        .navigation a.active, .navigation a:hover {
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            padding-left: 0px;
+            margin-left: 20px;
+            margin-right: 40px;
+            padding-right: 0px;
+            gap: 20px;
+        }
+        .actions .search-bar {
+            width: auto;
+            flex-grow: 1;
+        }
+        .independent-search-bar {
+            height: 30px;
+            min-width: 300px;
+            max-width: 300px;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        .actions img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+        .dropdown-menu a:hover {
+            background-color: #ddd;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .content {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+        a.card {
+            text-decoration: none;
+        }
+        .card, .create-liveboard {
+            position: relative;
+            background-color: white;
+            width: 250px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer; /* Makes the card clickable */
+            transition: transform 0.2s; /* Adds smooth transition for the hover effect */
+        }
+        .card:hover, .create-liveboard:hover {
+            transform: scale(1.02); /* Slightly grows the card on hover */
+        }
+        .card h3 {
+            font-size: 16px;
+            margin: 0 0 10px;
+            color: #333;
+        }
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+        }
+        .card .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            background-color: #8B3C67;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .card .tag.answer {
+            background-color: #016BEA;
+        }
+        .card .tag.liveboard {
+            background-color: #6f42c1;
+            margin-bottom: 10px;
+        }
+        .tag-date-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #888;
+            padding-bottom: 5px;
+        }
+        .contributors {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #E3E3E3;
+            padding-top: 10px;
+        }
+        .contributors img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .view-count {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+            margin-left: auto;
+        }
+        .view-count img {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+        .arrow-icon {
+            width: 18px;
+            height: 12px;
+            padding-bottom: 5px;
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+        .star-icon-magenta {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-magenta.png') no-repeat center center;
+            background-size: contain;
+        }
+        .star-icon-purple {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-purple.png') no-repeat center center;
+            background-size: contain;
+        }
+        .star-icon-blue {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            background: url('star-icon-blue.png') no-repeat center center;
+            background-size: contain;
+        }
+        .sort-filter {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #4277B8;
+            font-size: 14px;
+        }
+        .sort-filter img {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .sort-filter span {
+            line-height: 20px;
+        }
+         .search-bar input::placeholder {
+            color: rgba(18, 18, 18, 0.38);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-header">
+        <nav>
+            <img src="logo.png" alt="Logo" class="logo">
+            <a href="#">Me</a>
+            <a href="#">Team</a>
+            <a href="#">Company</a>
+            <a href="#">Tools</a>
+            <a href="#">My Apps</a>
+        </nav>
+        <div class="right">
+            <div class="search-container">
+                <img src="search-icon.png" alt="Search Icon" class="search-icon">
+                <input type="text" placeholder="Search for a colleague">
+            </div>
+            <img src="avatar-9.png" alt="User Avatar">
+        </div>
+    </div>
+    <div class="header">
+        <div class="header-content">
+            <h1>Insights in <span class="dropdown">
+                <button class="dropbtn">Performance</button>
+                <div class="dropdown-content">
+                    <a href="https://myangcc.github.io/analytics">Recruiting</a>
+                    <a href="#">People Analytics</a>
+                </div>
+            </span>
+                <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
+            </h1>
+        </div>
+    </div>
+    <div class="navigation">
+        <a href="performance.html">Favorites</a>
+        <a href="performance-reports.html" class="active">Reports</a>
+    </div>
+    <div class="actions">
+        <input type="text" class="independent-search-bar" placeholder="Search Favorites">
+        <div class="sort-filter">
+            <div class="dropdown">
+                <img src="sort-icon.png" alt="Sort Icon">
+                <span>Sort</span>
+                <div class="dropdown-menu">
+                    <a href="#">Recently Created</a>
+                    <a href="#">Most Viewed</a>
+                    <a href="#">Alphabetical (A-Z)</a>
+                    <a href="#">Alphabetical (Z-A)</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <img src="filter-icon.png" alt="Filter Icon">
+                <span>Filter</span>
+                <div class="dropdown-menu">
+                    <a href="#">All</a>
+                    <a href="#">Created by Me</a>
+                    <a href="#">Shared with Me</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <a href="#" class="card">
+            <h3>360 Cycle Progress Report</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        1,460
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Cycle Progress Report</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        1,322
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Employee Goal Use</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        975
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Employee Scores</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        843
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Goal Alignment</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        674
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Goal Progress and Updates</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        653
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Manager Scoring</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        595
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Performance Scores Over Time</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        401
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Score Distribution Report</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        387
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="#" class="card">
+            <h3>Scores Over Time</h3>
+            <div class="star-icon-magenta"></div>
+            <div class="bottom-content">
+                <div class="tag report">Report</div>
+                <div class="contributors">
+                    <img src="avatar-1.png" alt="Contributor">
+                    <img src="avatar-10.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        356
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!-- Add more cards as needed -->
+    </div>
+    <script>
+        function search() {
+            var query = document.getElementById("searchInput").value;
+            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
+        }
+        function searchFavorites() {
+            // Add search functionality here
+        }
+    </script>
+</body>
+</html>
