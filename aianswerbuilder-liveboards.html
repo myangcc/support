@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIAnswerBuilder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            height: 60px;
+        }
+        .header a {
+            text-decoration: none;
+            color: #595b5d;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .header img {
+            margin-right: 8px;
+        }
+        .header span {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+        }
+        .iframe-container {
+            width: 100%;
+            height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f6f8;
+        }
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="liveboards.html">
+            <img src="back-arrow.png" alt="Back">
+            Back to previous page
+        </a>
+        <span>Answer</span>
+    </div>
+    <div class="iframe-container">
+        <iframe id="answerIframe" src=""></iframe>
+    </div>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const query = getQueryParam('query');
+        const iframe = document.getElementById('answerIframe');
+        iframe.src = `https://clearco.thoughtspot.cloud/?embedApp=true&isSageEmbed#/embed/eureka?query=${encodeURIComponent(query)}&executeSearch=true`;
+    </script>
+</body>
+</html>
