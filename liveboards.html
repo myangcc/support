@@ -18,6 +18,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 2;
         }
         .top-header nav {
             display: flex;
@@ -40,7 +41,7 @@
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 5px 10px;
-            height: 25px
+            height: 25px;
         }
         .top-header .right .search-icon {
             width: 16px; /* Adjust the size of the search icon as needed */
@@ -140,6 +141,7 @@
             overflow: hidden;
             border: 1px solid #ccc;
             background: white;
+            z-index: 1;
         }
         .search-bar img {
             margin-left: 10px;
@@ -389,7 +391,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 9999;
             left: 0;
             top: 0;
             width: 100%;
@@ -406,6 +408,7 @@
             max-width: 400px;
             border-radius: 10px;
             text-align: center;
+            z-index: 10000;
         }
         .modal-button {
             margin-top: 20px;
@@ -601,12 +604,6 @@
 
         // Get the modal
         var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.querySelector(".create-liveboard");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
 
         // When the user clicks the button, open the modal 
         function openModal() {
