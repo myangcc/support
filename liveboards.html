@@ -592,8 +592,13 @@
     <!-- Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <p>You'll be able to create a Liveboard with this, but not in this prototype. Please close and continue. &#128512;</p>
-            <button class="modal-button" onclick="closeModal()">Close</button>
+            <h2>New Liveboard</h2>
+            <label for="liveboard-name">Name</label>
+            <input type="text" id="liveboard-name" placeholder="Name your Liveboard">
+            <label for="liveboard-description">Description</label>
+            <textarea id="liveboard-description" placeholder="Enter description for the liveboard"></textarea>
+            <button class="modal-button" onclick="saveLiveboard()">Save</button>
+            <button class="modal-button" onclick="closeModal()">Cancel</button>
         </div>
     </div>
 
@@ -621,6 +626,14 @@
             if (event.target == modal) {
                 modal.style.display = "none";
             }
+        }
+        // Save liveboard function
+        function saveLiveboard() {
+            var label = document.getElementById('liveboard-name').value;
+            var description = document.getElementById('liveboard-description').value;
+
+            // Perform actions with the label and description, such as saving them or redirecting
+            window.location.href = 'liveboard-new.html';
         }
     </script>
 </body>
