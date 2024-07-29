@@ -33,7 +33,7 @@
         .top-header .right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 10px; /* Reduced the gap to fit the search icon */
         }
         .top-header .right .search-container {
             display: flex;
@@ -44,7 +44,7 @@
             height: 25px;
         }
         .top-header .right .search-icon {
-            width: 16px;
+            width: 16px; /* Adjust the size of the search icon as needed */
             height: 16px;
             margin-right: 8px;
         }
@@ -92,7 +92,7 @@
             display: inline-block;
         }
         .header .dropdown .dropbtn {
-            background-color: #ffffff1a;
+            background-color: #ffffff1a; /* Set the background color */
             border: none;
             color: white;
             font-size: 32px;
@@ -258,11 +258,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            cursor: pointer;
-            transition: transform 0.2s;
+            cursor: pointer; /* Makes the card clickable */
+            transition: transform 0.2s; /* Adds smooth transition for the hover effect */
         }
         .card:hover, .create-liveboard:hover {
-            transform: scale(1.02);
+            transform: scale(1.02); /* Slightly grows the card on hover */
         }
         .create-liveboard {
             display: flex;
@@ -505,7 +505,24 @@
             <div class="bottom-content">
                 <div class="tag-date-container">
                     <div class="tag liveboard">Liveboard</div>
-                    <span id="dynamic-date-1">Updated July 10, 2024</span>
+                    <span>Updated July 10, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-3.png" alt="Contributor">
+                    <img src="avatar-4.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        2,244
+                    </div>
+                </div>
+            </div>
+        </a>   
+        <a href="https://myangcc.github.io/analytics/liveboard-2" class="card">
+            <h3>Overview of our Recruiters</h3>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Jun 1, 2024</span>
                 </div>
                 <div class="contributors">
                     <img src="avatar-3.png" alt="Contributor">
@@ -517,19 +534,66 @@
                 </div>
             </div>
         </a>
-        <!-- More cards... -->
+        <a href="https://myangcc.github.io/analytics/liveboard-3" class="card">
+            <h3>Open Reqs for Departmental Hiring Managers</h3>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Feb 15, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-5.png" alt="Contributor">
+                    <img src="avatar-6.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        942
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="https://myangcc.github.io/analytics/liveboard-4" class="card">
+            <h3>Time to Fill by Roles</h3>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Apr 3, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-7.png" alt="Contributor">
+                    <img src="avatar-8.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        735
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a href="https://myangcc.github.io/analytics/liveboard-5" class="card">
+            <h3>EEO by Department</h3>
+            <div class="star-icon-purple"></div>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span>Updated Mar 10, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-9.png" alt="Contributor">
+                    <img src="avatar-2.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        491
+                    </div>
+                </div>
+            </div>
+        </a>
+        <!-- Add more cards as needed -->
     </div>
 
     <!-- Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <h2>New Liveboard</h2>
-            <label for="liveboard-label">Label</label>
-            <input type="text" id="liveboard-label" placeholder="Enter label for the liveboard">
-            <label for="liveboard-description">Description</label>
-            <textarea id="liveboard-description" placeholder="Enter description for the liveboard"></textarea>
-            <button class="modal-button" onclick="saveLiveboard()">Save</button>
-            <button class="modal-button" onclick="closeModal()">Cancel</button>
+            <p>You'll be able to create a Liveboard with this, but not in this prototype. Please close and continue. &#128512;</p>
+            <button class="modal-button" onclick="closeModal()">Close</button>
         </div>
     </div>
 
@@ -542,7 +606,7 @@
         // Get the modal
         var modal = document.getElementById("myModal");
 
-        // When the user clicks the button, open the modal
+        // When the user clicks the button, open the modal 
         function openModal() {
             modal.style.display = "block";
         }
@@ -558,18 +622,6 @@
                 modal.style.display = "none";
             }
         }
-
-        // Save liveboard function
-        function saveLiveboard() {
-            var label = document.getElementById('liveboard-label').value;
-            var description = document.getElementById('liveboard-description').value;
-
-            // Perform actions with the label and description, such as saving them or redirecting
-            window.location.href = 'liveboard-new.html';
-        }
-
-        // Set dynamic date
-        document.getElementById("dynamic-date-1").textContent = "Updated " + new Date().toLocaleDateString();
     </script>
 </body>
 </html>
