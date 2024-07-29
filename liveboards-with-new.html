@@ -411,16 +411,52 @@
             text-align: center;
             z-index: 10000;
         }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .modal-content input,
+        .modal-content textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        .modal-content textarea {
+            height: 80px;
+            resize: none;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
         .modal-button {
-            margin-top: 20px;
             padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
-        .modal-button:hover {
+        .modal-button.cancel {
+            background-color: white;
+            color: #888;
+            border: 1px solid #ccc;
+            margin-lef: 230px;
+        }
+        .modal-button.save {
+            background-color: #007bff;
+            color: white;
+        }
+        .modal-button.cancel:hover {
+            background-color: #f0f0f0;
+        }
+        .modal-button.save:hover {
             background-color: #0056b3;
         }
     </style>
@@ -499,23 +535,6 @@
             <img src="create-icon.png" alt="Create Icon">
             <h3>Create a Liveboard</h3>
         </div>
-        <a href="https://myangcc.github.io/analytics/liveboard-new" class="card">
-            <h3>Your New Liveboard</h3>
-            <div class="bottom-content">
-                <div class="tag-date-container">
-                    <div class="tag liveboard">Liveboard</div>
-                    <span class="update-date">Updated July 10, 2024</span>
-                </div>
-                <div class="contributors">
-                    <img src="avatar-3.png" alt="Contributor">
-                    <img src="avatar-4.png" alt="Contributor">
-                    <div class="view-count">
-                        <img src="view-icon.png" alt="View Icon">
-                        1
-                    </div>
-                </div>
-            </div>
-        </a>           
         <a href="https://myangcc.github.io/analytics/liveboard-1" class="card">
             <h3>Our Recruiting Effectiveness Shared with Execs</h3>
             <div class="star-icon-purple"></div>
@@ -530,6 +549,23 @@
                     <div class="view-count">
                         <img src="view-icon.png" alt="View Icon">
                         2,244
+                    </div>
+                </div>
+            </div>
+        </a>   
+        <a href="https://myangcc.github.io/analytics/liveboard-new" class="card">
+            <h3>Your New Liveboard</h3>
+            <div class="bottom-content">
+                <div class="tag-date-container">
+                    <div class="tag liveboard">Liveboard</div>
+                    <span class="update-date">Updated July 10, 2024</span>
+                </div>
+                <div class="contributors">
+                    <img src="avatar-3.png" alt="Contributor">
+                    <img src="avatar-4.png" alt="Contributor">
+                    <div class="view-count">
+                        <img src="view-icon.png" alt="View Icon">
+                        1
                     </div>
                 </div>
             </div>
@@ -609,8 +645,15 @@
     <!-- Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <p>You'll be able to create a Liveboard with this, but not in this prototype. Please close and continue. &#128512;</p>
-            <button class="modal-button" onclick="closeModal()">Close</button>
+            <h2>New Liveboard</h2>
+            <label for="liveboard-name">Name</label>
+            <input type="text" id="liveboard-name" placeholder="Enter the Liveboard name">
+            <label for="liveboard-description">Description</label>
+            <textarea id="liveboard-description" placeholder="Enter description for the Liveboard"></textarea>
+            <div class="modal-buttons">
+                <button class="modal-button cancel" onclick="closeModal()">Cancel</button>
+                <button class="modal-button save" onclick="saveLiveboard()">Save</button>
+            </div>
         </div>
     </div>
 
@@ -639,6 +682,14 @@
                 modal.style.display = "none";
             }
         }
+        // Save liveboard function
+        function saveLiveboard() {
+            var label = document.getElementById('liveboard-name').value;
+            var description = document.getElementById('liveboard-description').value;
+
+            // Perform actions with the label and description, such as saving them or redirecting
+            window.location.href = 'liveboard-new.html';
+        }
         // Set the current date for all elements with class "update-date"
         function setCurrentDate() {
             var elements = document.querySelectorAll('.update-date');
@@ -646,9 +697,9 @@
             elements.forEach(function(element) {
                 element.textContent = 'Updated ' + currentDate;
             });
-        }
-        
+        } 
         document.addEventListener('DOMContentLoaded', setCurrentDate);
     </script>
 </body>
 </html>
+
