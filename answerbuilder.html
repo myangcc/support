@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIAnswerBuilder</title>
+    <title>Liveboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,6 @@
             font-weight: normal;
             display: flex;
             align-items: center;
-            cursor: pointer;
         }
         .header img {
             margin-right: 8px;
@@ -40,7 +39,7 @@
         }
         .iframe-container {
             width: 100%;
-            height: calc(100vh - 60px);
+            height: calc(100vh - 50px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -55,24 +54,14 @@
 </head>
 <body>
     <div class="header">
-        <a onclick="history.back()">
+        <a onclick="https://myangcc.github.io/analytics/answers.html">
             <img src="back-arrow.png" alt="Back">
             Back to previous page
         </a>
-        <span>Answer</span>
+        <span>Liveboard</span>
     </div>
     <div class="iframe-container">
-        <iframe id="answerIframe" src=""></iframe>
+        <iframe src="https://clearco.thoughtspot.cloud/?embedApp=true#/answer/" title="Interactive Prototype"></iframe>
     </div>
-    <script>
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
-        }
-
-        const query = getQueryParam('query');
-        const iframe = document.getElementById('answerIframe');
-       <iframe src = "https://clearco.thoughtspot.cloud/?embedApp=true&dataSources="04f783a5-cc54-43f9-993f-86aa8c9ecdfb"#/embed/answer" title="Interactive Prototype></iframe>
-    </script>
 </body>
 </html>
