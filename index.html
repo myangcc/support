@@ -623,7 +623,6 @@
     let typing = true;
     const typingSpeed = 50; // Adjust this value to control typing speed
     const delayBetweenTexts = 2000; // 2 seconds delay between texts
-    const defaultPlaceholder = 'Ask a question! Try "Which sources bring in the most hires?"';
 
     function type() {
         if (typing) {
@@ -651,7 +650,7 @@
     input.addEventListener('blur', () => {
         if (input.value.trim() === '') {
             typing = true;
-            input.placeholder = defaultPlaceholder; // Show the default static placeholder text
+            input.placeholder = staticText; // Only show the static text
             charIndex = 0;
             textIndex = 0;
             type();
@@ -662,6 +661,7 @@
     // Start typing effect on page load
     type();
 </script>
+
 
 </body>
 </html>
