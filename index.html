@@ -40,7 +40,7 @@
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 5px 10px;
-            height: 25px;
+            height: 25px
         }
         .top-header .right .search-icon {
             width: 16px; /* Adjust the size of the search icon as needed */
@@ -153,7 +153,10 @@
             transform: translate(-50%, -50%);
             aspect-ratio: 1;
             width: 100%;
-            animation: rotate 4.5s linear infinite;
+            animation: rotate 2s linear infinite;
+        }
+        .search-bar.paused::before {
+            animation-play-state: paused;
         }
         .search-bar::after {
             content: '';
@@ -198,24 +201,6 @@
             to {
                 transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
             }
-        }
-        /* Typing effect CSS */
-        .typing-placeholder {
-            display: inline-block;
-            overflow: hidden;
-            border-right: 0.15em solid #007bff; /* Cursor */
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.15em;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #007bff }
         }
         /* End of new fancy search-bar CSS */
         .navigation {
@@ -473,7 +458,7 @@
             <div class="search-bar-container">
                 <div class="search-bar animated">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try " onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -600,74 +585,66 @@
         </a>
         <!-- Add more cards as needed -->
     </div>
-<script>
-    function search() {
-        var query = document.getElementById("searchInput").value;
-        window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
-    }
+    <script>
+        function search() {
+            var query = document.getElementById("searchInput").value;
+            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
+        }
 
-    function searchFavorites() {
-        // Add search functionality here
-    }
+        function searchFavorites() {
+            // Add search functionality here
+        }
 
-    // Typing effect for placeholder text
-    const input = document.getElementById('searchInput');
-    const staticText = 'Ask a question! Try ';
-    const textArray = [
-        ' "Which sources bring in the most hires?"',
-        ' "How many hires did we have last year show monthly?"',
-        ' "How many candidates in each stage last month by week?"'
-    ];
-    let textIndex = 0;
-    let charIndex = 0;
-    let typing = true;
-    const typingSpeed = 50; // Adjust this value to control typing speed
-    const delayBetweenTexts = 2000; // 2 seconds delay between texts
+        // Typing effect for placeholder text
+        const input = document.getElementById('searchInput');
+        const searchBar = document.querySelector('.search-bar');
+        const basePlaceholderText = 'Ask a question! Try ';
+        const placeholderTexts = [
+            'Which sources bring in the most hires?',
+            'How many hires did we have last year show monthly?',
+            'How many candidates in each stage last month by week?'
+        ];
+        let currentTextIndex = 0;
+        let typingIndex = 0;
+        let typingTimeout;
+        let pauseTimeout;
+        let isFocused = false;
 
-    function type() {
-        if (typing) {
-            if (charIndex < textArray[textIndex].length) {
-                input.placeholder = staticText + textArray[textIndex].substring(0, charIndex + 1);
-                charIndex++;
-                setTimeout(type, typingSpeed);
+        function type() {
+            if (isFocused) return;
+            if (typingIndex < placeholderTexts[currentTextIndex].length) {
+                input.placeholder = basePlaceholderText + placeholderTexts[currentTextIndex].substring(0, typingIndex + 1);
+                typingIndex++;
+                typingTimeout = setTimeout(type, 50);
             } else {
-                charIndex = 0;
-                textIndex = (textIndex + 1) % textArray.length;
-                setTimeout(() => {
-                    if (!document.activeElement.isEqualNode(input)) {
-                        input.placeholder = staticText;
-                        setTimeout(type, typingSpeed);
-                    }
-                }, delayBetweenTexts);
+                pauseTimeout = setTimeout(() => {
+                    currentTextIndex = (currentTextIndex + 1) % placeholderTexts.length;
+                    typingIndex = 0;
+                    input.placeholder = basePlaceholderText;
+                    typingTimeout = setTimeout(type, 2000);
+                }, 2000);
             }
         }
-    }
 
-    input.addEventListener('focus', () => {
-        typing = false;
-        input.placeholder = ''; // Clear the placeholder text
-        charIndex = 0; // Reset the character index
-        textIndex = 0; // Reset the text index
-        document.querySelector('.search-bar').classList.remove('animated');
-    });
+        input.addEventListener('focus', () => {
+            isFocused = true;
+            clearTimeout(typingTimeout);
+            clearTimeout(pauseTimeout);
+            input.placeholder = '';
+            searchBar.classList.add('paused');
+        });
 
-    input.addEventListener('blur', () => {
-        if (input.value === '') {
-            typing = true;
-            charIndex = 0;
-            textIndex = 0;
+        input.addEventListener('blur', () => {
+            isFocused = false;
+            input.placeholder = basePlaceholderText;
+            typingIndex = 0;
+            currentTextIndex = 0;
             type();
-            document.querySelector('.search-bar').classList.add('animated');
-        }
-    });
+            searchBar.classList.remove('paused');
+        });
 
-    // Start typing effect on page load
-    type();
-</script>
-
-
-
-
-
+        // Start typing effect on page load
+        type();
+    </script>
 </body>
 </html>
