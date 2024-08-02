@@ -375,6 +375,75 @@
          .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
         }
+        <!-- Question Bar Border Animation -->
+        .search-bar {
+            --offset: 3px;
+            background: rgb(55, 21, 90);
+            border-radius: 50px;
+            position: relative;
+            width: 60%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        .search-bar::before {
+            content: '';
+            background: conic-gradient(transparent 270deg, white, transparent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            aspect-ratio: 1;
+            width: 100%;
+            animation: rotate 2s linear infinite;
+        }
+        .search-bar::after {
+            content: '';
+            background: inherit;
+            border-radius: inherit;
+            position: absolute;
+            inset: var(--offset);
+            height: calc(100% - 2 * var(--offset));
+            width: calc(100% - 2 * var(--offset));
+        }
+        .search-bar img {
+            margin-left: 10px;
+            width: 32px;
+            height: 32px;
+        }
+        .search-bar input {
+            background: transparent;
+            color: black; /* Change to black for better visibility */
+            font-size: 18px;
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            padding: 1.5rem;
+            border-radius: 50px 0 0 50px;
+            border: none;
+            outline: none;
+        }
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 50px 50px 0;
+            height: 48px;
+            font-size: 16px;
+            z-index: 10;
+        }
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+            }
+        }
+
+
+        
     </style>
 </head>
 <body>
