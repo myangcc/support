@@ -605,37 +605,56 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-
+    
         function searchFavorites() {
             // Add search functionality here
         }
-
+    
         // Typing effect for placeholder text
         const input = document.getElementById('searchInput');
-        const placeholderText = 'Ask a question! Try "Which sources bring in the most hires?"';
-        let i = 0;
-
+        const textArray = [
+            'Ask a question! Try "Which sources bring in the most hires?"',
+            'Ask a question! Try "How many hires did we have last year show monthly?"',
+            'Ask a question! Try "How many candidates in each stage last month by week?"'
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let typing = true;
+        const typingSpeed = 50; // Adjust this value to control typing speed
+        const delayBetweenTexts = 2000; // 2 seconds delay between texts
+    
         function type() {
-            if (i < placeholderText.length) {
-                input.placeholder += placeholderText.charAt(i);
-                i++;
-                setTimeout(type, 50);
+            if (typing) {
+                if (charIndex < textArray[textIndex].length) {
+                    input.placeholder += textArray[textIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    charIndex = 0;
+                    textIndex = (textIndex + 1) % textArray.length;
+                    setTimeout(() => {
+                        input.placeholder = '';
+                        setTimeout(type, typingSpeed);
+                    }, delayBetweenTexts);
+                }
             }
         }
-
+    
         input.addEventListener('focus', () => {
-            input.placeholder = '';
-            i = placeholderText.length; // Stop the typing effect
+            typing = false;
+            input.placeholder = 'Ask a question! Try "Which sources bring in the most hires?"';
             document.querySelector('.search-bar').classList.remove('animated');
         });
-
+    
         input.addEventListener('blur', () => {
+            typing = true;
             input.placeholder = '';
-            i = 0;
+            charIndex = 0;
+            textIndex = 0;
             type();
             document.querySelector('.search-bar').classList.add('animated');
         });
-
+    
         // Start typing effect on page load
         type();
     </script>
