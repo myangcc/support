@@ -132,20 +132,44 @@
             width: 100%;
             padding-top: 20px;
         }
+        /* Start of new fancy search-bar CSS */
         .search-bar {
+            --offset: 3px;
+            position: relative;
+            background: white;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             width: 60%;
             max-width: 800px;
-            border-radius: 50px;
             overflow: hidden;
-            border: 1px solid #ccc;
-            background: white;
+            border: none;
+        }
+        .search-bar::before {
+            content: '';
+            background: conic-gradient(transparent 270deg, #007bff, transparent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            aspect-ratio: 1;
+            width: 100%;
+            animation: rotate 2s linear infinite;
+        }
+        .search-bar::after {
+            content: '';
+            background: inherit;
+            border-radius: inherit;
+            position: absolute;
+            inset: var(--offset);
+            height: calc(100% - 2 * var(--offset));
+            width: calc(100% - 2 * var(--offset));
         }
         .search-bar img {
             margin-left: 10px;
             width: 32px;
             height: 32px;
+            z-index: 10;
         }
         .search-bar input {
             flex: 1;
@@ -154,6 +178,8 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
+            z-index: 10;
+            background: transparent;
         }
         .search-bar button {
             padding: 10px;
@@ -164,7 +190,17 @@
             border-radius: 0 50px 50px 0;
             height: 48px;
             font-size: 16px;
+            z-index: 10;
         }
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+            }
+        }
+        /* End of new fancy search-bar CSS */
         .navigation {
             display: flex;
             justify-content: flex-start;
@@ -262,10 +298,21 @@
         .card:hover, .create-liveboard:hover {
             transform: scale(1.02); /* Slightly grows the card on hover */
         }
+        .create-liveboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dotted #007bff;
+            cursor: pointer;
+        }
         .card h3 {
             font-size: 16px;
             margin: 0 0 10px;
             color: #333;
+        }
+        .create-liveboard h3 {
+            font-size: 16px;
+            color: #007bff;
         }
         .card p {
             font-size: 14px;
@@ -372,7 +419,7 @@
         .sort-filter span {
             line-height: 20px;
         }
-         .search-bar input::placeholder {
+        .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
         }
     </style>
@@ -447,7 +494,7 @@
         </div>
     </div>
     <div class="content">
-                <a href="https://myangcc.github.io/analytics/report-1" class="card">
+        <a href="https://myangcc.github.io/analytics/report-1" class="card">
             <h3>Recruiter Activity</h3>
             <div class="star-icon-magenta"></div>
             <div class="bottom-content">
