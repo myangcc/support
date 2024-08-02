@@ -600,63 +600,64 @@
         </a>
         <!-- Add more cards as needed -->
     </div>
-    <script>
-        function search() {
-            var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
-        }
-    
-        function searchFavorites() {
-            // Add search functionality here
-        }
-    
-        // Typing effect for placeholder text
-        const input = document.getElementById('searchInput');
-        const textArray = [
-            'Ask a question! Try "Which sources bring in the most hires?"',
-            'Ask a question! Try "How many hires did we have last year show monthly?"',
-            'Ask a question! Try "How many candidates in each stage last month by week?"'
-        ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let typing = true;
-        const typingSpeed = 50; // Adjust this value to control typing speed
-        const delayBetweenTexts = 2000; // 2 seconds delay between texts
-    
-        function type() {
-            if (typing) {
-                if (charIndex < textArray[textIndex].length) {
-                    input.placeholder += textArray[textIndex].charAt(charIndex);
-                    charIndex++;
+<script>
+    function search() {
+        var query = document.getElementById("searchInput").value;
+        window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
+    }
+
+    function searchFavorites() {
+        // Add search functionality here
+    }
+
+    // Typing effect for placeholder text
+    const input = document.getElementById('searchInput');
+    const staticText = 'Ask a question! Try ';
+    const textArray = [
+        ' "Which sources bring in the most hires?"',
+        ' "How many hires did we have last year show monthly?"',
+        ' "How many candidates in each stage last month by week?"'
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+    let typing = true;
+    const typingSpeed = 50; // Adjust this value to control typing speed
+    const delayBetweenTexts = 2000; // 2 seconds delay between texts
+
+    function type() {
+        if (typing) {
+            if (charIndex < textArray[textIndex].length) {
+                input.placeholder = staticText + textArray[textIndex].substring(0, charIndex + 1);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                charIndex = 0;
+                textIndex = (textIndex + 1) % textArray.length;
+                setTimeout(() => {
+                    input.placeholder = staticText;
                     setTimeout(type, typingSpeed);
-                } else {
-                    charIndex = 0;
-                    textIndex = (textIndex + 1) % textArray.length;
-                    setTimeout(() => {
-                        input.placeholder = '';
-                        setTimeout(type, typingSpeed);
-                    }, delayBetweenTexts);
-                }
+                }, delayBetweenTexts);
             }
         }
-    
-        input.addEventListener('focus', () => {
-            typing = false;
-            input.placeholder = 'Ask a question! Try "Which sources bring in the most hires?"';
-            document.querySelector('.search-bar').classList.remove('animated');
-        });
-    
-        input.addEventListener('blur', () => {
-            typing = true;
-            input.placeholder = '';
-            charIndex = 0;
-            textIndex = 0;
-            type();
-            document.querySelector('.search-bar').classList.add('animated');
-        });
-    
-        // Start typing effect on page load
+    }
+
+    input.addEventListener('focus', () => {
+        typing = false;
+        input.placeholder = staticText + textArray[0]; // Show the first placeholder text
+        document.querySelector('.search-bar').classList.remove('animated');
+    });
+
+    input.addEventListener('blur', () => {
+        typing = true;
+        input.placeholder = staticText;
+        charIndex = 0;
+        textIndex = 0;
         type();
-    </script>
+        document.querySelector('.search-bar').classList.add('animated');
+    });
+
+    // Start typing effect on page load
+    type();
+</script>
 </body>
 </html>
