@@ -134,7 +134,7 @@
         }
         /* Start of new fancy search-bar CSS */
         .search-bar {
-            --offset: 2px;
+            --offset: 1.5px;
             position: relative;
             background: white;
             border-radius: 50px;
@@ -145,7 +145,7 @@
             overflow: hidden;
             border: none;
         }
-        .search-bar::before {
+        .search-bar.animated::before {
             content: '';
             background: conic-gradient(transparent 270deg, #9220d9, transparent);
             position: absolute;
@@ -153,7 +153,7 @@
             transform: translate(-50%, -50%);
             aspect-ratio: 1;
             width: 100%;
-            animation: rotate 2s linear infinite;
+            animation: rotate 4s linear infinite;
         }
         .search-bar::after {
             content: '';
@@ -453,9 +453,9 @@
                 <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
             </h1>
             <div class="search-bar-container">
-                <div class="search-bar">
+                <div class="search-bar animated">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try &quot;Which sources bring in the most hires?&quot;" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try &quot;Which sources bring in the most hires?&quot;" onkeydown="if(event.key === 'Enter') search()" onfocus="stopAnimation()" onblur="startAnimation()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -589,6 +589,12 @@
         }
         function searchFavorites() {
             // Add search functionality here
+        }
+        function stopAnimation() {
+            document.querySelector('.search-bar').classList.remove('animated');
+        }
+        function startAnimation() {
+            document.querySelector('.search-bar').classList.add('animated');
         }
     </script>
 </body>
