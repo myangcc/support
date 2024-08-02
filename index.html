@@ -612,7 +612,7 @@
 
     // Typing effect for placeholder text
     const input = document.getElementById('searchInput');
-    const staticText = 'Ask a question! Try ';
+    const staticText = 'Ask a question! Try';
     const textArray = [
         ' "Which sources bring in the most hires?"',
         ' "How many hires did we have last year show monthly?"',
@@ -647,16 +647,6 @@
         document.querySelector('.search-bar').classList.remove('animated');
     });
 
-    input.addEventListener('blur', () => {
-        if (input.value.trim() === '') {
-            typing = true;
-            input.placeholder = staticText; // Only show the static text
-            charIndex = 0;
-            textIndex = 0;
-            type();
-            document.querySelector('.search-bar').classList.add('animated');
-        }
-    });
 
     // Start typing effect on page load
     type();
