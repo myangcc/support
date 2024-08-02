@@ -40,7 +40,7 @@
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 5px 10px;
-            height: 25px
+            height: 25px;
         }
         .top-header .right .search-icon {
             width: 16px; /* Adjust the size of the search icon as needed */
@@ -145,7 +145,7 @@
             overflow: hidden;
             border: none;
         }
-        .search-bar::before {
+        .search-bar.animated::before {
             content: '';
             background: conic-gradient(transparent 270deg, #9220d9, transparent);
             position: absolute;
@@ -154,9 +154,6 @@
             aspect-ratio: 1;
             width: 100%;
             animation: rotate 2s linear infinite;
-        }
-        .search-bar.paused::before {
-            animation-play-state: paused;
         }
         .search-bar::after {
             content: '';
@@ -597,50 +594,46 @@
 
         // Typing effect for placeholder text
         const input = document.getElementById('searchInput');
-        const searchBar = document.querySelector('.search-bar');
-        const basePlaceholderText = 'Ask a question! Try ';
-        const placeholderTexts = [
-            'Which sources bring in the most hires?',
-            'How many hires did we have last year show monthly?',
-            'How many candidates in each stage last month by week?'
+        const baseText = 'Ask a question! Try ';
+        const placeholderOptions = [
+            '"Which sources bring in the most hires?"',
+            '"How many hires did we have last year show monthly?"',
+            '"How many candidates in each stage last month by week?"'
         ];
-        let currentTextIndex = 0;
-        let typingIndex = 0;
-        let typingTimeout;
-        let pauseTimeout;
+        let i = 0;
+        let j = 0;
         let isFocused = false;
 
         function type() {
-            if (isFocused) return;
-            if (typingIndex < placeholderTexts[currentTextIndex].length) {
-                input.placeholder = basePlaceholderText + placeholderTexts[currentTextIndex].substring(0, typingIndex + 1);
-                typingIndex++;
-                typingTimeout = setTimeout(type, 50);
+            if (isFocused) return; // Do not run typing effect if input is focused
+            const currentText = placeholderOptions[j];
+            if (i < currentText.length) {
+                input.placeholder = baseText + currentText.substring(0, i + 1);
+                i++;
+                setTimeout(type, 50); // Speed of typing
             } else {
-                pauseTimeout = setTimeout(() => {
-                    currentTextIndex = (currentTextIndex + 1) % placeholderTexts.length;
-                    typingIndex = 0;
-                    input.placeholder = basePlaceholderText;
-                    typingTimeout = setTimeout(type, 2000);
-                }, 2000);
+                i = 0;
+                j = (j + 1) % placeholderOptions.length; // Cycle through the options
+                setTimeout(() => {
+                    if (!isFocused) {
+                        type();
+                    }
+                }, 2000); // Wait for 2 seconds before typing the next placeholder
             }
         }
 
         input.addEventListener('focus', () => {
             isFocused = true;
-            clearTimeout(typingTimeout);
-            clearTimeout(pauseTimeout);
             input.placeholder = '';
-            searchBar.classList.add('paused');
+            i = 0; // Reset typing position
+            document.querySelector('.search-bar').classList.remove('animated');
         });
 
         input.addEventListener('blur', () => {
             isFocused = false;
-            input.placeholder = basePlaceholderText;
-            typingIndex = 0;
-            currentTextIndex = 0;
+            input.placeholder = '';
+            document.querySelector('.search-bar').classList.add('animated');
             type();
-            searchBar.classList.remove('paused');
         });
 
         // Start typing effect on page load
