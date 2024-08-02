@@ -623,6 +623,7 @@
     let typing = true;
     const typingSpeed = 50; // Adjust this value to control typing speed
     const delayBetweenTexts = 2000; // 2 seconds delay between texts
+    const defaultPlaceholder = 'Ask a question! Try "Which sources bring in the most hires?"';
 
     function type() {
         if (typing) {
@@ -643,21 +644,24 @@
 
     input.addEventListener('focus', () => {
         typing = false;
-        input.placeholder = staticText + textArray[0]; // Show the first placeholder text
+        input.placeholder = ''; // Clear the placeholder text
         document.querySelector('.search-bar').classList.remove('animated');
     });
 
     input.addEventListener('blur', () => {
-        typing = true;
-        input.placeholder = staticText;
-        charIndex = 0;
-        textIndex = 0;
-        type();
-        document.querySelector('.search-bar').classList.add('animated');
+        if (input.value.trim() === '') {
+            typing = true;
+            input.placeholder = defaultPlaceholder; // Show the default static placeholder text
+            charIndex = 0;
+            textIndex = 0;
+            type();
+            document.querySelector('.search-bar').classList.add('animated');
+        }
     });
 
     // Start typing effect on page load
     type();
 </script>
+
 </body>
 </html>
