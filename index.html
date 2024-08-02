@@ -40,7 +40,7 @@
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 5px 10px;
-            height: 25px
+            height: 25px;
         }
         .top-header .right .search-icon {
             width: 16px; /* Adjust the size of the search icon as needed */
@@ -145,7 +145,7 @@
             overflow: hidden;
             border: none;
         }
-        .search-bar.animated::before {
+        .search-bar::before {
             content: '';
             background: conic-gradient(transparent 270deg, #9220d9, transparent);
             position: absolute;
@@ -198,6 +198,24 @@
             to {
                 transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
             }
+        }
+        /* Typing effect CSS */
+        .typing-placeholder {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 0.15em solid #007bff; /* Cursor */
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #007bff }
         }
         /* End of new fancy search-bar CSS */
         .navigation {
@@ -455,7 +473,7 @@
             <div class="search-bar-container">
                 <div class="search-bar animated">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try &quot;Which sources bring in the most hires?&quot;" onkeydown="if(event.key === 'Enter') search()" onfocus="stopAnimation()" onblur="startAnimation()">
+                    <input type="text" id="searchInput" placeholder="">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -587,15 +605,39 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
+
         function searchFavorites() {
             // Add search functionality here
         }
-        function stopAnimation() {
+
+        // Typing effect for placeholder text
+        const input = document.getElementById('searchInput');
+        const placeholderText = 'Ask a question! Try "Which sources bring in the most hires?"';
+        let i = 0;
+
+        function type() {
+            if (i < placeholderText.length) {
+                input.placeholder += placeholderText.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            }
+        }
+
+        input.addEventListener('focus', () => {
+            input.placeholder = '';
+            i = placeholderText.length; // Stop the typing effect
             document.querySelector('.search-bar').classList.remove('animated');
-        }
-        function startAnimation() {
+        });
+
+        input.addEventListener('blur', () => {
+            input.placeholder = '';
+            i = 0;
+            type();
             document.querySelector('.search-bar').classList.add('animated');
-        }
+        });
+
+        // Start typing effect on page load
+        type();
     </script>
 </body>
 </html>
