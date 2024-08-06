@@ -40,7 +40,7 @@
             border: 1px solid #ccc;
             border-radius: 20px;
             padding: 5px 10px;
-            height: 25px
+            height: 25px;
         }
         .top-header .right .search-icon {
             width: 16px; /* Adjust the size of the search icon as needed */
@@ -89,6 +89,7 @@
         .header .dropdown {
             position: relative;
             display: inline-block;
+            z-index: 11;
         }
         .header .dropdown .dropbtn {
             background-color: #ffffff1a; /* Set the background color */
@@ -123,7 +124,7 @@
             display: block;
         }
         .header .dropdown:hover .dropbtn {
-            background-color: #ffffff1a;
+            background-color: #ffffff1a; /* Ensure this matches the initial state */
         }
         .search-bar-container {
             display: flex;
@@ -132,20 +133,43 @@
             width: 100%;
             padding-top: 20px;
         }
+        /* Start of new fancy search-bar CSS */
         .search-bar {
+            --offset: 2px;
+            position: relative;
+            background: white;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             width: 60%;
             max-width: 800px;
-            border-radius: 50px;
             overflow: hidden;
-            border: 1px solid #ccc;
-            background: white;
+            border: none;
+        }
+        .search-bar.animated::before {
+            content: '';
+            background: conic-gradient(transparent 270deg, #9220d9, transparent);
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            aspect-ratio: 1;
+            width: 100%;
+            animation: rotate 4.5s linear infinite;
+        }
+        .search-bar::after {
+            content: '';
+            background: inherit;
+            border-radius: inherit;
+            position: absolute;
+            inset: var(--offset);
+            height: calc(100% - 2 * var(--offset));
+            width: calc(100% - 2 * var(--offset));
         }
         .search-bar img {
             margin-left: 10px;
             width: 32px;
             height: 32px;
+            z-index: 10;
         }
         .search-bar input {
             flex: 1;
@@ -154,6 +178,8 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
+            z-index: 10;
+            background: transparent;
         }
         .search-bar button {
             padding: 10px;
@@ -164,7 +190,17 @@
             border-radius: 0 50px 50px 0;
             height: 48px;
             font-size: 16px;
+            z-index: 10;
         }
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+            }
+        }
+        /* End of new fancy search-bar CSS */
         .navigation {
             display: flex;
             justify-content: flex-start;
@@ -186,8 +222,9 @@
             display: flex;
             align-items: center;
             border-top: 1px solid #ccc;
-            padding-top: 20px;
+            padding-top: 23px;
             padding-left: 0px;
+            padding-bottom: 10px;
             margin-left: 20px;
             margin-right: 40px;
             padding-right: 0px;
@@ -198,6 +235,7 @@
             flex-grow: 1;
         }
         .independent-search-bar {
+            display: none;
             height: 30px;
             min-width: 300px;
             max-width: 300px;
@@ -206,11 +244,23 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
+            margin-left: auto;
+            margin-right: 19px;
         }
-        .actions img {
+        .search-icon-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: 19px;
+            background: white;
+            border: 1px solid rgb(204, 204, 204);
+            border-radius: 30px;
+            padding: 13px;
+        }
+        .search-icon-container img {
             width: 20px;
             height: 20px;
-            cursor: pointer;
         }
         .dropdown-menu {
             display: none;
@@ -244,7 +294,6 @@
         }
         a.card {
             text-decoration: none;
-            min-height: 120px;
         }
         .card, .create-liveboard {
             position: relative;
@@ -263,10 +312,21 @@
         .card:hover, .create-liveboard:hover {
             transform: scale(1.02); /* Slightly grows the card on hover */
         }
+        .create-liveboard {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dotted #007bff;
+            cursor: pointer;
+        }
         .card h3 {
             font-size: 16px;
             margin: 0 0 10px;
             color: #333;
+        }
+        .create-liveboard h3 {
+            font-size: 16px;
+            color: #007bff;
         }
         .card p {
             font-size: 14px;
@@ -364,7 +424,6 @@
             align-items: center;
             gap: 20px;
             color: #4277B8;
-            font-size: 14px;
         }
         .sort-filter img {
             margin-right: 5px;
@@ -373,7 +432,7 @@
         .sort-filter span {
             line-height: 20px;
         }
-         .search-bar input::placeholder {
+        .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
         }
         .manage-share {
@@ -387,6 +446,7 @@
             padding-top: -10px;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -419,9 +479,9 @@
                 <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
             </h1>
             <div class="search-bar-container">
-                <div class="search-bar">
+                <div class="search-bar animated">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try &quot;Which sources bring in the most hires?&quot;" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try " onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
@@ -432,8 +492,8 @@
         <a href="reports.html" class="active">Reports</a>
         <a href="liveboards.html">Liveboards</a>
         <a href="answers.html">Answers</a>
-        <a href="benchmarking.html">Benchmarking</a>
-        <div class="manage-share">
+        <a href="#">Benchmarking</a>
+       <div class="manage-share">
             <img src="manage-share-icon.png" alt="Manage Share Icon">
             <span>Manage Shares</span>
         </div>
@@ -466,7 +526,7 @@
         </div>
     </div>
     <div class="content">
-        <a href="https://myangcc.github.io/analytics/report-1" class="card">
+        <a href="report-1.html" class="card">
             <h3>Recruiter Activity</h3>
             <div class="star-icon-magenta"></div>
             <div class="bottom-content">
@@ -481,7 +541,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/report-2" class="card">
+        <a href="report-2.html" class="card">
             <h3>Time to Fill</h3>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
@@ -495,7 +555,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/report-3" class="card">
+        <a href="report-3.html" class="card">
             <h3>Candidate Data</h3>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
@@ -509,7 +569,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/report-4" class="card">
+        <a href="report-4.html" class="card">
             <h3>Career Site Visitors</h3>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
@@ -523,7 +583,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/report-5" class="card">
+        <a href="report-5.html" class="card">
             <h3>Funnel Analysis</h3>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
@@ -537,7 +597,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/report-6" class="card">
+        <a href="report-6.html" class="card">
             <h3>Candidate Flow Log</h3>
             <div class="bottom-content">
                 <div class="tag report">Report</div>
@@ -556,12 +616,55 @@
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder-reports.html?query=' + encodeURIComponent(query);
+            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
         function searchFavorites() {
             // Add search functionality here
         }
-                // Independent search bar expand effect
+        // Typing effect for placeholder text
+        const input = document.getElementById('searchInput');
+        const baseText = 'Ask a question! Try ';
+        const placeholderOptions = [
+            '"Which sources bring in the most hires?"',
+            '"Which managers have a 50% or below acceptance rate?"',
+            '"How many candidates in each stage last month by week?"'
+        ];
+        let i = 0;
+        let j = 0;
+        let isFocused = false;
+        function type() {
+            if (isFocused) return; // Do not run typing effect if input is focused
+            const currentText = placeholderOptions[j];
+            if (i < currentText.length) {
+                input.placeholder = baseText + currentText.substring(0, i + 1);
+                i++;
+                setTimeout(type, 50); // Speed of typing
+            } else {
+                i = 0;
+                j = (j + 1) % placeholderOptions.length; // Cycle through the options
+                setTimeout(() => {
+                    if (!isFocused) {
+                        type();
+                    }
+                }, 2000); // Wait for 2 seconds before typing the next placeholder
+            }
+        }
+        input.addEventListener('focus', () => {
+            isFocused = true;
+            input.placeholder = '';
+            i = 0; // Reset typing position
+            document.querySelector('.search-bar').classList.remove('animated');
+        });
+        input.addEventListener('blur', () => {
+            isFocused = false;
+            input.placeholder = '';
+            document.querySelector('.search-bar').classList.add('animated');
+            type();
+        });
+        // Start typing effect on page load
+        type();
+
+        // Independent search bar expand effect
         const searchIconContainer = document.querySelector('.search-icon-container');
         const independentSearchBar = document.querySelector('.independent-search-bar');
 
