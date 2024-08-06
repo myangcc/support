@@ -222,8 +222,9 @@
             display: flex;
             align-items: center;
             border-top: 1px solid #ccc;
-            padding-top: 20px;
+            padding-top: 23px;
             padding-left: 0px;
+            padding-bottom: 10px;
             margin-left: 20px;
             margin-right: 40px;
             padding-right: 0px;
@@ -423,7 +424,6 @@
             align-items: center;
             gap: 20px;
             color: #4277B8;
-            font-size: 14px;
         }
         .sort-filter img {
             margin-right: 5px;
@@ -434,6 +434,15 @@
         }
         .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
+        }
+        .manage-share {
+            align-content: center;
+            color: #4277B8;
+            padding-left: 20px;
+            border-left: 1px solid #e8e8e8;
+            border-top-width: 0px;
+            padding-top: -10;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -481,6 +490,9 @@
         <a href="liveboards.html">Liveboards</a>
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
+        <div class="manage-share"
+            <img src="manage-share-icon.png" alt="Manage Share Icon">
+            <span>Manage Shares</span></div>
         <div class="search-icon-container">
             <img src="search-icon.png" alt="Search Icon" id="expandSearch">
         </div>
