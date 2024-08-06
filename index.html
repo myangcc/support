@@ -89,7 +89,7 @@
         .header .dropdown {
             position: relative;
             display: inline-block;
-            z-index: 11
+            z-index: 11;
         }
         .header .dropdown .dropbtn {
             background-color: #ffffff1a; /* Set the background color */
@@ -233,24 +233,8 @@
             width: auto;
             flex-grow: 1;
         }
-        .search-icon-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            background-color: white;
-            border: 1px solid black;
-            cursor: pointer;
-            margin-left: auto;
-            margin-right: 19px;
-        }
-        .search-icon-container img {
-            width: 20px;
-            height: 20px;
-        }
         .independent-search-bar {
+            display: none;
             height: 30px;
             min-width: 300px;
             max-width: 300px;
@@ -261,12 +245,15 @@
             outline: none;
             margin-left: auto;
             margin-right: 19px;
-            display: none; /* Initially hidden */
         }
-        .actions img {
+        .search-icon-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .search-icon-container img {
             width: 20px;
             height: 20px;
-            cursor: pointer;
         }
         .dropdown-menu {
             display: none;
@@ -489,9 +476,9 @@
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
         <div class="search-icon-container">
-            <img src="search-icon.png" alt="Search Icon">
+            <img src="search-icon.png" alt="Search Icon" id="expandSearch">
         </div>
-        <input type="text" class="independent-search-bar" placeholder="Search Favorites">
+        <input type="text" class="independent-search-bar" placeholder="Search Favorites" id="independentSearch">
     </div>
     <div class="actions">
         <div class="sort-filter">
@@ -611,11 +598,9 @@
             var query = document.getElementById("searchInput").value;
             window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder.html?query=' + encodeURIComponent(query);
         }
-
         function searchFavorites() {
             // Add search functionality here
         }
-
         // Typing effect for placeholder text
         const input = document.getElementById('searchInput');
         const baseText = 'Ask a question! Try ';
@@ -627,7 +612,6 @@
         let i = 0;
         let j = 0;
         let isFocused = false;
-
         function type() {
             if (isFocused) return; // Do not run typing effect if input is focused
             const currentText = placeholderOptions[j];
@@ -645,37 +629,36 @@
                 }, 2000); // Wait for 2 seconds before typing the next placeholder
             }
         }
-
         input.addEventListener('focus', () => {
             isFocused = true;
             input.placeholder = '';
             i = 0; // Reset typing position
             document.querySelector('.search-bar').classList.remove('animated');
         });
-
         input.addEventListener('blur', () => {
             isFocused = false;
             input.placeholder = '';
             document.querySelector('.search-bar').classList.add('animated');
             type();
         });
-
         // Start typing effect on page load
         type();
 
-        // Independent search bar functionality
-        const independentSearchIcon = document.querySelector('.search-icon-container');
+        // Independent search bar expand effect
+        const searchIconContainer = document.querySelector('.search-icon-container');
         const independentSearchBar = document.querySelector('.independent-search-bar');
 
-        independentSearchIcon.addEventListener('click', () => {
+        searchIconContainer.addEventListener('click', () => {
+            searchIconContainer.style.display = 'none';
             independentSearchBar.style.display = 'block';
             independentSearchBar.focus();
-            independentSearchIcon.style.display = 'none';
         });
 
         independentSearchBar.addEventListener('blur', () => {
-            independentSearchBar.style.display = 'none';
-            independentSearchIcon.style.display = 'flex';
+            if (independentSearchBar.value === '') {
+                independentSearchBar.style.display = 'none';
+                searchIconContainer.style.display = 'flex';
+            }
         });
     </script>
 </body>
