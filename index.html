@@ -89,7 +89,7 @@
         .header .dropdown {
             position: relative;
             display: inline-block;
-            z-index: 11;
+            z-index: 11
         }
         .header .dropdown .dropbtn {
             background-color: #ffffff1a; /* Set the background color */
@@ -233,8 +233,24 @@
             width: auto;
             flex-grow: 1;
         }
+        .search-icon-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px solid black;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: 19px;
+        }
+        .search-icon-container img {
+            width: 20px;
+            height: 20px;
+        }
         .independent-search-bar {
-            display: none;
             height: 30px;
             min-width: 300px;
             max-width: 300px;
@@ -245,15 +261,12 @@
             outline: none;
             margin-left: auto;
             margin-right: 19px;
+            display: none; /* Initially hidden */
         }
-        .search-icon-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .search-icon-container img {
+        .actions img {
             width: 20px;
             height: 20px;
+            cursor: pointer;
         }
         .dropdown-menu {
             display: none;
@@ -476,9 +489,9 @@
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
         <div class="search-icon-container">
-            <img src="search-icon.png" alt="Search Icon" id="expandSearch">
+            <img src="search-icon.png" alt="Search Icon">
         </div>
-        <input type="text" class="independent-search-bar" placeholder="Search Favorites" id="independentSearch">
+        <input type="text" class="independent-search-bar" placeholder="Search Favorites">
     </div>
     <div class="actions">
         <div class="sort-filter">
@@ -650,21 +663,19 @@
         // Start typing effect on page load
         type();
 
-        // Independent search bar expand effect
-        const searchIconContainer = document.querySelector('.search-icon-container');
+        // Independent search bar functionality
+        const independentSearchIcon = document.querySelector('.search-icon-container');
         const independentSearchBar = document.querySelector('.independent-search-bar');
 
-        searchIconContainer.addEventListener('click', () => {
-            searchIconContainer.style.display = 'none';
+        independentSearchIcon.addEventListener('click', () => {
             independentSearchBar.style.display = 'block';
             independentSearchBar.focus();
+            independentSearchIcon.style.display = 'none';
         });
 
         independentSearchBar.addEventListener('blur', () => {
-            if (independentSearchBar.value === '') {
-                independentSearchBar.style.display = 'none';
-                searchIconContainer.style.display = 'flex';
-            }
+            independentSearchBar.style.display = 'none';
+            independentSearchIcon.style.display = 'flex';
         });
     </script>
 </body>
