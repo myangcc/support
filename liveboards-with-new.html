@@ -558,9 +558,9 @@
         </div>
     </div>
     <div class="navigation">
-        <a href="index.html">Favorites</a>
+        <a href="index.html" class="active">Favorites</a>
         <a href="reports.html">Reports</a>
-        <a href="liveboards.html" class="active">Liveboards</a>
+        <a href="liveboards.html">Liveboards</a>
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
        <div class="manage-share">
@@ -634,7 +634,7 @@
                     </div>
                 </div>
             </div>
-        </a>    
+        </a>   
         <a href="liveboard-2.html" class="card">
             <h3>Overview of our Recruiters</h3>
             <div class="bottom-content">
@@ -755,7 +755,10 @@
             // Perform actions with the label and description, such as saving them or redirecting
             window.location.href = 'liveboard-new.html';
         }
-        // Set the current date for all elements with class "update-date"
+        function searchObjects() {
+            // Add search functionality here
+        }
+         // Set the current date for all elements with class "update-date"
         function setCurrentDate() {
             var elements = document.querySelectorAll('.update-date');
             var currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -764,10 +767,7 @@
             });
         } 
         document.addEventListener('DOMContentLoaded', setCurrentDate);
-
-        function searchObjects() {
-            // Add search functionality here
-        }
+        
         // Typing effect for placeholder text
         const input = document.getElementById('searchInput');
         const baseText = 'Ask a question! Try ';
@@ -827,8 +827,6 @@
                 searchIconContainer.style.display = 'flex';
             }
         });
-        
     </script>
 </body>
 </html>
-
