@@ -309,7 +309,7 @@
             cursor: pointer; /* Makes the card clickable */
             transition: transform 0.2s; /* Adds smooth transition for the hover effect */
         }
-        .card:hover, .create-liveboard:hover {
+        .card:hover, .create-answer:hover {
             transform: scale(1.02); /* Slightly grows the card on hover */
         }
         .create-answer {
@@ -318,13 +318,14 @@
             align-items: center;
             border: 2px dotted #007bff;
             cursor: pointer;
+            text-decoration: none;
         }
         .card h3 {
             font-size: 16px;
             margin: 0 0 10px;
             color: #333;
         }
-        .create-liveboard h3 {
+        .create-answer h3 {
             font-size: 16px;
             color: #007bff;
         }
