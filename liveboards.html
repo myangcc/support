@@ -446,7 +446,77 @@
             padding-top: -10px;
             cursor: pointer;
         }
-
+/* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 10000;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+        }
+        .modal-content label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .modal-content input,
+        .modal-content textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        .modal-content textarea {
+            height: 80px;
+            resize: none;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .modal-button.cancel {
+            background-color: white;
+            color: #888;
+            border: 1px solid #ccc;
+            margin-lef: 230px;
+        }
+        .modal-button.save {
+            background-color: #007bff;
+            color: white;
+        }
+        .modal-button.cancel:hover {
+            background-color: #f0f0f0;
+        }
+        .modal-button.save:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
