@@ -18,7 +18,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 2;
         }
         .top-header nav {
             display: flex;
@@ -90,6 +89,7 @@
         .header .dropdown {
             position: relative;
             display: inline-block;
+            z-index: 11;
         }
         .header .dropdown .dropbtn {
             background-color: #ffffff1a; /* Set the background color */
@@ -124,7 +124,7 @@
             display: block;
         }
         .header .dropdown:hover .dropbtn {
-            background-color: #ffffff1a;
+            background-color: #ffffff1a; /* Ensure this matches the initial state */
         }
         .search-bar-container {
             display: flex;
@@ -133,20 +133,43 @@
             width: 100%;
             padding-top: 20px;
         }
+        /* Start of new fancy search-bar CSS */
         .search-bar {
+            --offset: 2px;
+            position: relative;
+            background: white;
+            border-radius: 50px;
             display: flex;
             align-items: center;
             width: 60%;
             max-width: 800px;
-            border-radius: 50px;
             overflow: hidden;
-            border: 1px solid #ccc;
-            background: white;
+            border: none;
+        }
+        .search-bar.animated::before {
+            content: '';
+            background: conic-gradient(transparent 270deg, #9220d9, transparent);
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            aspect-ratio: 1;
+            width: 100%;
+            animation: rotate 4.5s linear infinite;
+        }
+        .search-bar::after {
+            content: '';
+            background: inherit;
+            border-radius: inherit;
+            position: absolute;
+            inset: var(--offset);
+            height: calc(100% - 2 * var(--offset));
+            width: calc(100% - 2 * var(--offset));
         }
         .search-bar img {
             margin-left: 10px;
             width: 32px;
             height: 32px;
+            z-index: 10;
         }
         .search-bar input {
             flex: 1;
@@ -155,6 +178,8 @@
             outline: none;
             border-radius: 50px 0 0 50px;
             font-size: 18px;
+            z-index: 10;
+            background: transparent;
         }
         .search-bar button {
             padding: 10px;
@@ -165,7 +190,17 @@
             border-radius: 0 50px 50px 0;
             height: 48px;
             font-size: 16px;
+            z-index: 10;
         }
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+            }
+        }
+        /* End of new fancy search-bar CSS */
         .navigation {
             display: flex;
             justify-content: flex-start;
@@ -187,8 +222,9 @@
             display: flex;
             align-items: center;
             border-top: 1px solid #ccc;
-            padding-top: 20px;
+            padding-top: 23px;
             padding-left: 0px;
+            padding-bottom: 10px;
             margin-left: 20px;
             margin-right: 40px;
             padding-right: 0px;
@@ -199,6 +235,7 @@
             flex-grow: 1;
         }
         .independent-search-bar {
+            display: none;
             height: 30px;
             min-width: 300px;
             max-width: 300px;
@@ -207,11 +244,23 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             outline: none;
+            margin-left: auto;
+            margin-right: 19px;
         }
-        .actions img {
+        .search-icon-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-left: auto;
+            margin-right: 19px;
+            background: white;
+            border: 1px solid rgb(204, 204, 204);
+            border-radius: 30px;
+            padding: 13px;
+        }
+        .search-icon-container img {
             width: 20px;
             height: 20px;
-            cursor: pointer;
         }
         .dropdown-menu {
             display: none;
@@ -375,7 +424,6 @@
             align-items: center;
             gap: 20px;
             color: #4277B8;
-            font-size: 14px;
         }
         .sort-filter img {
             margin-right: 5px;
@@ -387,77 +435,18 @@
         .search-bar input::placeholder {
             color: rgba(18, 18, 18, 0.38);
         }
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 10px;
-            text-align: center;
-            z-index: 10000;
-        }
-        .modal-content h2 {
-            margin-bottom: 20px;
-        }
-        .modal-content label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .modal-content input,
-        .modal-content textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-        }
-        .modal-content textarea {
-            height: 80px;
-            resize: none;
-        }
-        .modal-buttons {
+        .manage-share {
             display: flex;
-            justify-content: space-between;
-        }
-        .modal-button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            align-items: center;
+            gap: 8px; /* Add spacing between icon and text */
+            color: #4277B8;
+            padding-left: 20px;
+            border-left: 1px solid #e8e8e8;
+            border-top-width: 0px;
+            padding-top: -10px;
             cursor: pointer;
         }
-        .modal-button.cancel {
-            background-color: white;
-            color: #888;
-            border: 1px solid #ccc;
-            margin-lef: 230px;
-        }
-        .modal-button.save {
-            background-color: #007bff;
-            color: white;
-        }
-        .modal-button.cancel:hover {
-            background-color: #f0f0f0;
-        }
-        .modal-button.save:hover {
-            background-color: #0056b3;
-        }
+
     </style>
 </head>
 <body>
@@ -483,30 +472,37 @@
             <h1>Insights in <span class="dropdown">
                 <button class="dropbtn">Recruiting</button>
                 <div class="dropdown-content">
-                    <a href="https://myangcc.github.io/analytics/performance">Performance</a>
+                    <a href="performance.html">Performance</a>
                     <a href="#">People Analytics</a>
                 </div>
             </span>
                 <img src="arrow-icon.png" alt="Arrow" class="arrow-icon">
             </h1>
             <div class="search-bar-container">
-                <div class="search-bar">
+                <div class="search-bar animated">
                     <img src="ai-icon.png" alt="AI Icon" class="ai-icon">
-                    <input type="text" id="searchInput" placeholder="Ask a question! Try &quot;Which sources bring in the most hires?&quot;" onkeydown="if(event.key === 'Enter') search()">
+                    <input type="text" id="searchInput" placeholder="Ask a question! Try " onkeydown="if(event.key === 'Enter') search()">
                     <button onclick="search()">Get Answer</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="navigation">
-        <a href="index.html">Favorites</a>
+        <a href="index.html" class="active">Favorites</a>
         <a href="reports.html">Reports</a>
-        <a href="liveboards.html" class="active">Liveboards</a>
+        <a href="liveboards.html">Liveboards</a>
         <a href="answers.html">Answers</a>
         <a href="#">Benchmarking</a>
+       <div class="manage-share">
+            <img src="manage-share-icon.png" alt="Manage Share Icon">
+            <span>Manage Shares</span>
+        </div>
+        <div class="search-icon-container">
+            <img src="search-icon.png" alt="Search Icon" id="expandSearch">
+        </div>
+        <input type="text" class="independent-search-bar" placeholder="Search All" id="independentSearch">
     </div>
     <div class="actions">
-        <input type="text" class="independent-search-bar" placeholder="Search Liveboards">
         <div class="sort-filter">
             <div class="dropdown">
                 <img src="sort-icon.png" alt="Sort Icon">
@@ -534,7 +530,7 @@
             <img src="create-icon.png" alt="Create Icon">
             <h3>Create a Liveboard</h3>
         </div>
-        <a href="https://myangcc.github.io/analytics/liveboard-1" class="card">
+        <a href="liveboard-1.html" class="card">
             <h3>Our Recruiting Effectiveness Shared with Execs</h3>
             <div class="star-icon-purple"></div>
             <div class="bottom-content">
@@ -552,7 +548,7 @@
                 </div>
             </div>
         </a>   
-        <a href="https://myangcc.github.io/analytics/liveboard-2" class="card">
+        <a href="liveboard-2.html" class="card">
             <h3>Overview of our Recruiters</h3>
             <div class="bottom-content">
                 <div class="tag-date-container">
@@ -569,7 +565,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/liveboard-3" class="card">
+        <a href="liveboard-3.html" class="card">
             <h3>Open Reqs for Departmental Hiring Managers</h3>
             <div class="bottom-content">
                 <div class="tag-date-container">
@@ -586,7 +582,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/liveboard-4" class="card">
+        <a href="liveboard-4.html" class="card">
             <h3>Time to Fill by Roles</h3>
             <div class="bottom-content">
                 <div class="tag-date-container">
@@ -603,7 +599,7 @@
                 </div>
             </div>
         </a>
-        <a href="https://myangcc.github.io/analytics/liveboard-5" class="card">
+        <a href="liveboard-5.html" class="card">
             <h3>EEO by Department</h3>
             <div class="star-icon-purple"></div>
             <div class="bottom-content">
@@ -642,7 +638,7 @@
     <script>
         function search() {
             var query = document.getElementById("searchInput").value;
-            window.location.href = 'https://myangcc.github.io/analytics/aianswerbuilder-liveboards.html?query=' + encodeURIComponent(query);
+            window.location.href = 'aianswerbuilder-liveboards.html?query=' + encodeURIComponent(query);
         }
 
         // Get the modal
@@ -672,6 +668,68 @@
             // Perform actions with the label and description, such as saving them or redirecting
             window.location.href = 'liveboard-new.html';
         }
+        function searchObjects() {
+            // Add search functionality here
+        }
+        // Typing effect for placeholder text
+        const input = document.getElementById('searchInput');
+        const baseText = 'Ask a question! Try ';
+        const placeholderOptions = [
+            '"Which sources bring in the most hires?"',
+            '"Which managers have a 50% or below acceptance rate?"',
+            '"How many candidates in each stage last month by week?"'
+        ];
+        let i = 0;
+        let j = 0;
+        let isFocused = false;
+        function type() {
+            if (isFocused) return; // Do not run typing effect if input is focused
+            const currentText = placeholderOptions[j];
+            if (i < currentText.length) {
+                input.placeholder = baseText + currentText.substring(0, i + 1);
+                i++;
+                setTimeout(type, 50); // Speed of typing
+            } else {
+                i = 0;
+                j = (j + 1) % placeholderOptions.length; // Cycle through the options
+                setTimeout(() => {
+                    if (!isFocused) {
+                        type();
+                    }
+                }, 2000); // Wait for 2 seconds before typing the next placeholder
+            }
+        }
+        input.addEventListener('focus', () => {
+            isFocused = true;
+            input.placeholder = '';
+            i = 0; // Reset typing position
+            document.querySelector('.search-bar').classList.remove('animated');
+        });
+        input.addEventListener('blur', () => {
+            isFocused = false;
+            input.placeholder = '';
+            document.querySelector('.search-bar').classList.add('animated');
+            type();
+        });
+        // Start typing effect on page load
+        type();
+
+        // Independent search bar expand effect
+        const searchIconContainer = document.querySelector('.search-icon-container');
+        const independentSearchBar = document.querySelector('.independent-search-bar');
+
+        searchIconContainer.addEventListener('click', () => {
+            searchIconContainer.style.display = 'none';
+            independentSearchBar.style.display = 'block';
+            independentSearchBar.focus();
+        });
+
+        independentSearchBar.addEventListener('blur', () => {
+            if (independentSearchBar.value === '') {
+                independentSearchBar.style.display = 'none';
+                searchIconContainer.style.display = 'flex';
+            }
+        });
     </script>
 </body>
 </html>
